@@ -29,7 +29,7 @@
     <!-- Trending News Section Begin -->
     <div class="trending-news-section">
         <div class="container">
-            <div class="tn-title"><i class="fa fa-caret-right"></i> Trending News</div>
+            <div class="tn-title"><i class="fa fa-caret-right"></i> Новости</div>
             <div class="news-slider owl-carousel">
                 <div class="nt-item">Vinyl Banners With Its Different Types Kinds And Applications</div>
                 <div class="nt-item">Banners With Its Different Types Kinds And Applications</div>
@@ -44,23 +44,68 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="ms-content">
-                        <h4>Next Match</h4>
+                        <h4>Выбираем рацион</h4>
+                        <form>
+                        <select class="input-group">>
+                            <option value="1">Мужчина</option>
+                            <option value="2">Женщина</option>
+                        </select>
+                        <input placeholder="Ваш вес" class="input-group">
+                        <input placeholder="Ваш рост" class="input-group">
+                        <select class="input-group">>
+                            <option value="1">Активный образ жизни</option>
+                            <option value="2">Умеренная активность</option>
+                            <option value="3">Сидячий образ жизни (PHP Developer)</option>
+                        </select>
+                        <select class="input-group">>
+                            <option value="1">Потеря веса</option>
+                            <option value="2">Поддержка веса</option>
+                            <option value="3">Набор веса</option>
+                        </select>
+                        <button class="btn btn-primary button-group">Подобрать :)</button>
+                        </form>
+                    </div>
+                </div>
+                <style>
+                    .input-group {
+                        display: block;
+                        margin-top: 10px;
+                        border-radius: 3px;
+                        border: 0;
+                    }
+                    .button-group {
+                        display: block;
+                        margin-top: 10px;
+                        border-radius: 3px;
+                    }
+                </style>
+            </div>
+        </div>
+    </section>
+
+    <!-- Match Section Begin -->
+    <section class="match-section set-bg" data-setbg="img/match/match-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ms-content">
+                        <h4>Сравниваем еду</h4>
                         <div class="mc-table">
                             <table>
                                 <tbody>
                                     <tr>
                                         <td class="left-team">
                                             <img src="img/match/tf-1.jpg" alt="">
-                                            <h6>Cambodia</h6>
+                                            <h6>Овсянка</h6>
                                         </td>
                                         <td class="mt-content">
-                                            <div class="mc-op">Ucraina vs England</div>
+                                            <div class="mc-op">Завтракаем по уму</div>
                                             <h4>VS</h4>
-                                            <div class="mc-op">15 September 2019</div>
+                                            <div class="mc-op"><a href="#">Подробнее</a></div>
                                         </td>
                                         <td class="right-team">
                                             <img src="img/match/tf-2.jpg" alt="">
-                                            <h6>Qatar</h6>
+                                            <h6>Гречка</h6>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -112,7 +157,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="ms-content">
-                        <h4>Recent Results</h4>
+                        <h4>Сравниваем еду</h4>
                         <div class="mc-table">
                             <table>
                                 <tbody>
