@@ -47,8 +47,7 @@ class FoodController extends Controller
      */
     public function show($id)
     {
-        $recipe = Food::getRecipeById($id);
-        return new FoodResource($recipe);
+        return new FoodResource(Food::getRecipeById($id));
     }
 
     /**
