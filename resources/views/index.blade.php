@@ -45,24 +45,24 @@
                 <div class="col-lg-6">
                     <div class="ms-content">
                         <h4>Выбираем рацион</h4>
-                        <form>
-                        <select class="input-group">>
+                        <form class="recipe-form">
+                        <select class="input-group" name="sex">
                             <option value="1">Мужчина</option>
                             <option value="2">Женщина</option>
                         </select>
-                        <input placeholder="Ваш вес" class="input-group">
-                        <input placeholder="Ваш рост" class="input-group">
-                        <select class="input-group">>
+                        <input placeholder="Ваш вес" class="input-group" name="weight">
+                        <input placeholder="Ваш рост" class="input-group" name="height">
+                        <select class="input-group" name="lifestyle">
                             <option value="1">Активный образ жизни</option>
                             <option value="2">Умеренная активность</option>
                             <option value="3">Сидячий образ жизни (PHP Developer)</option>
                         </select>
-                        <select class="input-group">>
+                        <select class="input-group" name="target">
                             <option value="1">Потеря веса</option>
                             <option value="2">Поддержка веса</option>
                             <option value="3">Набор веса</option>
                         </select>
-                        <button class="btn btn-primary button-group">Подобрать :)</button>
+                        <button class="btn btn-primary button-group calc-button">Подобрать :)</button>
                         </form>
                     </div>
                 </div>
