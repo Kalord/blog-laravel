@@ -15,7 +15,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-        //
+        return Food::find(\Request::input())->toJson();
     }
 
     /**
