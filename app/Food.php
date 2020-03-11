@@ -24,4 +24,13 @@ class Food extends Model
     {
         return self::where('id', $id)->find(1);
     }
+
+    public static function find(Array $options)
+    {
+        $set = self::where('sex', $options['sex'])->
+                     where('body_weight', '<=', $options['weight'])->
+                     get();
+        
+        return $set;
+    }
 }
