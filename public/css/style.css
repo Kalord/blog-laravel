@@ -2710,3 +2710,13 @@ ol {
         height: 410px;
     }
 }
+
+.error-message {
+    margin-top: 10px;
+}
+
+.error-input {
+    -webkit-box-shadow: 2px 1px 17px -1px rgba(240, 24, 42, 1);
+    -moz-box-shadow: 2px 1px 17px -1px rgba(240, 24, 42, 1);
+    box-shadow: 2px 1px 17px -1px rgba(240, 24, 42, 1);
+}

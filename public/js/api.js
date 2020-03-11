@@ -54,7 +54,21 @@ const formValidator = (formData, rules) => {
     return errors;
 };
 
+const showErrors = (errors) => {
+    for (key in errors) {
+        $(`[name=${key}]`).after(`
+        <div class="error-message alert alert-danger" style="display: none;">${errors[key]}</div>
+        `)
+        $(`[name=${key}]`).addClass('error-input');
+    }
+
+    $('.error-message').fadeIn(1000);
+}
+
 $('.calc-button').click((event) => {
+    $('.input-group').removeClass('error-input');
+    $('.error-message').remove();
+
     let errors = formValidator('.recipe-form', {
         'sex': ['required', 'range', 1, 2],
         'weight': ['required', 'integer'],
@@ -64,6 +78,7 @@ $('.calc-button').click((event) => {
     });
 
     if (!$.isEmptyObject(errors)) {
+        showErrors(errors);
         return false;
     }
 
