@@ -16,3 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+
+/** 
+ * Login 
+ */
+//Form
+Route::get('/login', 'UserController@login');
+//Logic
+Route::post('/start', 'UserController@start');
+
+/**
+ * Registration
+ */
+//Form
+Route::get('/registration', 'UserController@registration');
+//Logic
+Route::post('/create', 'UserController@create');
+
+Route::get('/logout', 'UserController@logout');

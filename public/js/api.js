@@ -73,7 +73,7 @@ $('.calc-button').click((event) => {
         'sex': ['required', 'range', 1, 2],
         'weight': ['required', 'integer'],
         'height': ['required', 'integer'],
-        'lifestyle': ['required', 'range', 1, 2],
+        'lifestyle': ['required', 'range', 1, 3],
         'target': ['required', 'range', 1, 3],
     });
 
