@@ -27,7 +27,7 @@
     </div>
 
     <div class="wrap-input100">
-        <input class="input100" type="password" name="password_repeat" placeholder="Повторите пароль" require>
+        <input class="input100" type="password" name="password_confirmation" placeholder="Повторите пароль" require>
         <span class="focus-input100"></span>
     </div>
 

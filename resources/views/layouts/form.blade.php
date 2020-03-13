@@ -24,6 +24,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!--===============================================================================================-->
 </head>
 
@@ -56,6 +57,7 @@
     <!--===============================================================================================-->
     <script src="vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
+    <script src="js/errors.js"></script>
     <script src="js/form.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
