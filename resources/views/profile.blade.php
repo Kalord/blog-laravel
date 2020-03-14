@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<img src="/images/tm-easy-profile.jpg" class="img-responsive img-circle tm-border" alt="templatemo easy profile">
+				<img src="{{ $user->avatar }}" class="img-responsive img-circle tm-border avatar" alt="templatemo easy profile" style="width: 300px">
 				<hr>
 				<h1 class="tm-title bold shadow">{{ $user->name }}</h1>
 				<h1 class="white bold shadow" contenteditable="true">{{ $user->info()->status }}</h1>
