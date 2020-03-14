@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserCreate;
+use App\Http\Requests\UserStart;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -19,16 +23,40 @@ class UserController extends Controller
 
     public function logout()
     {
-
+        auth()->logout();
+        return redirect()->home();
     }
 
-    public function start(Request $request)
+    /**
+     * Запоминание пользователя в системе
+     * @param UserStart $request
+     */
+    public function start(UserStart $request)
     {
-        var_dump($request->input());
+        $user = User::findByEmail($request->input('email'));
+
+        if(Hash::check($request->input('password'), $user->password)) {
+            auth()->login($user, true);
+
+            return [
+                'status' => 'success'
+            ];
+        }
+
+        return [
+            'status' => 'error',
+            'message' => 'Некорретные данные'
+        ];
     }
 
+    /**
+     * Создание пользователя
+     * @param UserCreate $request
+     * @return
+     */
     public function create(UserCreate $request)
-    {        
-        var_dump('Here');
+    {
+        $request->merge(['password' => Hash::make($request->input('password'))]);
+        return User::create($request->input());
     }
 }
