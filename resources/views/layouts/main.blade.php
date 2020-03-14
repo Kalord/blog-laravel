@@ -34,11 +34,18 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="ht-info">
+                            @if($user)
                             <ul>
                                 <li>Люблю жрать сладкое</li>
-                                <li><a href="#">Войти</a></li>
-                                <li><a href="#">Контакты</a></li>
+                                <li><a href="/profile">Профиль</a></li>
+                                <li><a href="/logout">Выйти</a></li>
                             </ul>
+                            @else
+                            <ul>
+                                <li>Люблю жрать сладкое</li>
+                                <li><a href="/login">Войти</a></li>
+                            </ul>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-6">
