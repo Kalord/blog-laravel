@@ -13,7 +13,7 @@
 				<img src="{{ $user->avatar }}" class="img-responsive img-circle tm-border avatar" alt="templatemo easy profile" style="width: 300px">
 				<hr>
 				<h1 class="tm-title bold shadow">{{ $user->name }}</h1>
-				<h1 class="white bold shadow" contenteditable="true">{{ $user->info()->status }}</h1>
+				<h1 class="white bold shadow status" contenteditable="true">{{ $user->info()->status }}</h1>
 			</div>
 		</div>
 	</div>
@@ -27,6 +27,7 @@
 				<h3 class="accent">Профиль</h3>
 				@if($user->id == Auth()->id())
 				<h2>Настройки</h2>
+				{{csrf_field()}}
 				<h5>Приватность</h5>
 				<p>
 					<div class="input-group">
@@ -68,8 +69,20 @@
 						</div>
 						<input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 					</div>
-
 					<button class="btn btn-primary">Изменить</button>
+
+					<h5 style="margin-top: 42px">Изменить аватар</h5>
+					<div class="input-group">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input avatar-input" id="inputGroupFile04">
+							<label class="custom-file-label avatar-label" for="inputGroupFile">Выберите изображение</label>
+						</div>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary avatar-update" type="button">Изменить</button>
+						</div>
+					</div>
+					<div class="alert alert-success avatar-success-message" style="display: none; margin-top: 10px;">Аватар изменен</div>
+					<div class="alert alert-danger avatar-error-message" style="display: none; margin-top: 10px;"></div>
 				</p>
 				@else
 				<h2>Состояние</h2>
