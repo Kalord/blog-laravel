@@ -45,3 +45,5 @@ Route::post('/create', 'UserController@create')->middleware('guest');
 Route::get('/logout', 'UserController@logout')->middleware('auth');
 
 Route::get('/profile', 'ProfileController@index')->middleware('auth');
+
+Route::post('/settings/avatar', 'SettingsController@avatar')->middleware('auth');
