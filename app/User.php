@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return self::where('email', $email)->first();
     }
+
+    public function info()
+    {
+        return $this->hasOne('App\UserInfo', 'id_user')->first();
+    }
 }
