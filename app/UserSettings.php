@@ -12,4 +12,9 @@ class UserSettings extends Model
      * @var string
      */
     protected $table = 'user_settings';
+
+    public static function get($id)
+    {
+        return self::where('id_user', $id)->first();
+    }
 }

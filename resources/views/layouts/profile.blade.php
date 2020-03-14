@@ -13,9 +13,9 @@ Easy Profile Template
 http://www.templatemo.com/tm-467-easy-profile
 -->
 	<!-- stylesheet css -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/templatemo-blue.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/templatemo-blue.css">
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" style="font-family: Arial">
 
@@ -29,11 +29,11 @@ http://www.templatemo.com/tm-467-easy-profile
     @yield('content')
 
 <!-- javascript js -->	
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>	
-<script src="js/jquery.backstretch.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/profile.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>	
+<script src="/js/jquery.backstretch.min.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/js/profile.js"></script>
 
 </body>
 </html>

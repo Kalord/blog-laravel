@@ -47,3 +47,5 @@ Route::get('/logout', 'UserController@logout')->middleware('auth');
 Route::get('/profile', 'ProfileController@index')->middleware('auth');
 
 Route::post('/settings/avatar', 'SettingsController@avatar')->middleware('auth');
+
+Route::get('/user/{id}', 'ProfileController@user');

@@ -13,7 +13,7 @@
 				<img src="{{ $user->avatar }}" class="img-responsive img-circle tm-border avatar" alt="templatemo easy profile" style="width: 300px">
 				<hr>
 				<h1 class="tm-title bold shadow">{{ $user->name }}</h1>
-				<h1 class="white bold shadow status" contenteditable="true">{{ $user->info()->status }}</h1>
+				<h1 class="white bold shadow status" @if($user->id == Auth()->id()) contenteditable="true" @endif;>{{ $user->info()->status }}</h1>
 			</div>
 		</div>
 	</div>
@@ -87,8 +87,12 @@
 				@else
 				<h2>Состояние</h2>
 				<p>
-					Возраст: 20 лет<br>
-					Вес: 65 килограмм<br>
+					@if($settings->show_age)
+					Возраст: {{$user->info()->age}}<br>
+					@endif
+					@if($settings->show_weight)
+					Вес: {{$user->info()->weight}} килограмм<br>
+					@endif
 					Правильно питается: n дней<br>
 					Написал рецептов: n<br>
 					Написал советов: n<br>
