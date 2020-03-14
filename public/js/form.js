@@ -49,7 +49,7 @@ if (window.location.pathname === '/login') {
             }
 
             if (html.status == 'success') {
-
+                window.location.href = '/profile';
             }
         },
         (html) => {

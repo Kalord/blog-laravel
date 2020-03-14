@@ -17,21 +17,27 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/home', function () {
+    return view('index');
+})->name('home');
+
 
 /**
  * Login
  */
 //Form
-Route::get('/login', 'UserController@login');
+Route::get('/login', 'UserController@login')->name('login')->middleware('guest');
 //Logic
-Route::post('/start', 'UserController@start');
+Route::post('/start', 'UserController@start')->middleware('guest');
 
 /**
  * Registration
  */
 //Form
-Route::get('/registration', 'UserController@registration');
+Route::get('/registration', 'UserController@registration')->middleware('guest');
 //Logic
-Route::post('/create', 'UserController@create');
+Route::post('/create', 'UserController@create')->middleware('guest');
 
-Route::get('/logout', 'UserController@logout');
+Route::get('/logout', 'UserController@logout')->middleware('auth');
+
+Route::get('/profile', 'ProfileController@index')->middleware('auth');
