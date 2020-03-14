@@ -8,6 +8,8 @@ use App\Http\Requests\UserStart;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\UserInfo;
+use App\UserSettings;
 
 class UserController extends Controller
 {
@@ -57,6 +59,17 @@ class UserController extends Controller
     public function create(UserCreate $request)
     {
         $request->merge(['password' => Hash::make($request->input('password'))]);
-        return User::create($request->input());
+        $user = User::create($request->input());
+
+        $userInfo = new UserInfo();
+        $userSettings = new UserSettings();
+
+        $userInfo->id_user = $user->id;
+        $userSettings->id_user = $user->id;
+
+        $userInfo->save();
+        $userSettings->save();
+
+        return $user;
     }
 }
