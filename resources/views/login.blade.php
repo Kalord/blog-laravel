@@ -28,5 +28,6 @@
             </span>
         </button>
     </div>
+    <div class="alert alert-danger error-message"></div>
 </form>
 @endsection

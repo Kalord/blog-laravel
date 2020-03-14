@@ -39,4 +39,5 @@
         </button>
     </div>
 </form>
+    <div class="alert alert-success success-message-reg"><span id="username">Name</span>, теперь вы можете <a href="/login">авторизоваться</a></div>
 @endsection
