@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 
-/** 
- * Login 
+/**
+ * Login
  */
 //Form
 Route::get('/login', 'UserController@login');
