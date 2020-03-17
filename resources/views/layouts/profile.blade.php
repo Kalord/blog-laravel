@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
-<!-- 
+<!--
 Easy Profile Template
 http://www.templatemo.com/tm-467-easy-profile
 -->
@@ -28,12 +28,14 @@ http://www.templatemo.com/tm-467-easy-profile
 
     @yield('content')
 
-<!-- javascript js -->	
+<!-- javascript js -->
 <script src="/js/jquery.js"></script>
-<script src="/js/bootstrap.min.js"></script>	
+<script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.backstretch.min.js"></script>
 <script src="/js/custom.js"></script>
+<script src="/js/errors.js"></script>
 <script src="/js/profile.js"></script>
+<script src="/js/editor.js"></script>
 
 </body>
 </html>

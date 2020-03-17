@@ -31,25 +31,27 @@
 				<h5>Приватность</h5>
 				<p>
 					<div class="input-group">
-						<select class="custom-select" id="inputGroupSelect04">
+						<select class="custom-select" id="age">
 							<option selected>Отображать возраст?</option>
 							<option value="1">Да</option>
-							<option value="2">Нет</option>
+							<option value="0">Нет</option>
 						</select>
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button">Save</button>
+							<button class="btn btn-outline-secondary btn-save-age" type="button">Save</button>
 						</div>
 					</div>
+					<div class="alert alert-success age-success-message" style="display: none; margin-top: 10px;">Изменено</div>
 					<div class="input-group" style="margin-top: 3px;">
-						<select class="custom-select" id="inputGroupSelect04">
+						<select class="custom-select" id="weight">
 							<option selected>Отображать вес?</option>
 							<option value="1">Да</option>
-							<option value="2">Нет</option>
+							<option value="0">Нет</option>
 						</select>
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button">Save</button>
+							<button class="btn btn-outline-secondary btn-save-weight" type="button">Save</button>
 						</div>
 					</div>
+					<div class="alert alert-success weight-success-message" style="display: none; margin-top: 10px;">Изменено</div>
 
 					<br>
 					<br>
@@ -58,18 +60,27 @@
 
 					<div class="input-group mb-3" style="margin-top: 3px;">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon1">Старый пароль</span>
+							<span class="input-group-text">Старый пароль</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+						<input type="password" class="form-control old-password" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 					</div>
 
 					<div class="input-group mb-3" style="margin-top: -10px;">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon1">Новый пароль</span>
+							<span class="input-group-text">Новый пароль</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+						<input type="password" class="form-control new-password" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 					</div>
-					<button class="btn btn-primary">Изменить</button>
+
+                    <div class="input-group mb-3" style="margin-top: -10px;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Повторите нновый пароль</span>
+                        </div>
+                        <input type="password" class="form-control new-password-confirmation" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+					<button class="btn btn-primary btn-password-update">Изменить</button>
+                    <div class="alert alert-success password-success-message" style="display: none; margin-top: 10px;">Пароль изменен</div>
+                    <div class="alert alert-danger password-error-message" style="display: none; margin-top: 10px;"></div>
 
 					<h5 style="margin-top: 42px">Изменить аватар</h5>
 					<div class="input-group">
@@ -101,6 +112,7 @@
 				@endif
 			</div>
 		</div>
+
 		<div class="col-md-6 col-sm-12">
 			<div class="skills">
 				<h2 class="white">Звезды</h2>
