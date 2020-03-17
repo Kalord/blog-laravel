@@ -46,6 +46,31 @@ Route::get('/logout', 'UserController@logout')->middleware('auth');
 
 Route::get('/profile', 'ProfileController@index')->middleware('auth');
 
-Route::post('/settings/avatar', 'SettingsController@avatar')->middleware('auth');
+/**
+ * Settings for the user
+ */
+Route::group(['prefix' => 'settings'], function() {
+    Route::get('status', 'SettingsController@statusUpdate')->middleware('auth');
+    
+    Route::get('age', 'SettingsController@ageUpdate')->middleware('auth');
+    
+    Route::get('weight', 'SettingsController@weightUpdate')->middleware('auth');
+
+    Route::post('avatar', 'SettingsController@avatarUpdate')->middleware('auth');
+
+    Route::post('password', 'SettingsController@passwordUpdate')->middleware('auth');
+});
+
+Route::group(['prefix' => 'editor'], function() {
+    Route::get('index', 'EditorController@index');
+    Route::get('create', 'EditorController@create');
+    Route::get('update', 'EditorController@update');
+    Route::get('read', 'EditorController@read');
+    Route::get('delete', 'EditorController@delete');
+});
 
 Route::get('/user/{id}', 'ProfileController@user');
+
+Route::get('/blog', 'BlogController@index');
+
+Route::get('/detail/{id}', 'BlogController@detail');

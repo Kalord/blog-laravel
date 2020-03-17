@@ -18,4 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('food', 'FoodController');
+Route::group(['prefix' => 'food'], function() {
+    Route::get('/{sex}/{body_weight}', 'FoodController@index');
+    Route::get('/{id}', 'FoodController@show');
+});
