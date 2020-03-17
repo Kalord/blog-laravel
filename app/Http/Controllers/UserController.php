@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserCreate;
 use App\Http\Requests\UserStart;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\UserInfo;
 use App\UserSettings;
+use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
@@ -59,17 +59,6 @@ class UserController extends Controller
     public function create(UserCreate $request)
     {
         $request->merge(['password' => Hash::make($request->input('password'))]);
-        $user = User::create($request->input());
-
-        $userInfo = new UserInfo();
-        $userSettings = new UserSettings();
-
-        $userInfo->id_user = $user->id;
-        $userSettings->id_user = $user->id;
-
-        $userInfo->save();
-        $userSettings->save();
-
-        return $user;
+        return UserRepository::userCreate($request->input());
     }
 }
