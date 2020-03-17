@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->hasOne('App\UserInfo', 'id_user')->first();
     }
 
+    public function settings()
+    {
+        return $this->hasOne('App\UserSettings', 'id_user')->first();
+    }
+
     public static function findByEmail($email)
     {
         return self::where('email', $email)->first();
