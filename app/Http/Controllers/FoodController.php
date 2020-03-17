@@ -13,9 +13,15 @@ class FoodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($sex, $body_weight)
     {
-        return Food::find(\Request::input())->toJson();
+        $set = Food::find([
+            'sex'         => $sex,
+            'body_weight' => $body_weight
+        ]);
+        
+        if($set->isEmpty()) abort(404);
+        return $set->toJson();
     }
 
     /**
@@ -48,7 +54,8 @@ class FoodController extends Controller
     public function show($id)
     {
         $recipe = Food::getRecipeById($id);
-        if($recipe) return new FoodResource($recipe);
+        if(!$recipe) abort(404);
+        return new FoodResource($recipe);
     }
 
     /**
