@@ -19,6 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'food'], function() {
-    Route::get('/{sex}/{body_weight}', 'FoodController@index');
-    Route::get('/{id}', 'FoodController@show');
+    Route::get('/{sex}/{body_weight}', '\App\Http\Controllers\API\FoodController@index');
+    Route::get('/{id}', '\App\Http\Controllers\API\FoodController@show');
+});
+
+Route::group(['prefix' => 'posts'], function() {
+    Route::get('/', '\App\Http\Controllers\API\PostController@index');
+    Route::get('/{id}', '\App\Http\Controllers\API\PostController@show');
 });
