@@ -1,7 +1,7 @@
 /**
- * @param {string} key 
- * @param {string} value 
- * @param {bool} replaceInCaseExists 
+ * @param {string} key
+ * @param {string} value
+ * @param {bool} replaceInCaseExists
  */
 const updateSearchStateURL = (key, value, replaceInCaseExists = true) => {
     let currentUrl = window.location.search;
@@ -24,8 +24,8 @@ const updateSearchStateURL = (key, value, replaceInCaseExists = true) => {
 };
 
 /**
- * @param {string} key 
- * @param {string} value 
+ * @param {string} key
+ * @param {string} value
  */
 const removeSearchStateURL = (key, value) => {
     let currentUrl = window.location.search;
@@ -60,18 +60,19 @@ const updatePosts = () => {
                 $('.blog-items').append(`
                 <div class="single-item">
                     <div class="bi-pic">
-                        <img src="img/blog/blog-2.jpg" alt="">
+                        <img src="${post.cover}" alt="" style="width: 300px;">
                     </div>
                     <div class="bi-text">
-                    <h4><a href="/detail/${post.id}">${post.title}</a></h4>
+                    <h4><a href="/blog/detail/${post.id}">${post.title}</a></h4>
                     <ul>
-                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                        <li><i class="fa fa-edit"></i> 3 Comment</li>
+                        <li>${post.user.name}</li>
+                        <li>${post.category.title}</li>
                     </ul>
                     <p>It’s that time again when people start thinking about their New Years Resolutions.
                        Usually they involve, losing weight, quitting smoking, and joining a gym, just to
                         mention a few.
                     </p>
+                    <a href="/blog/detail/${post.id}" class="btn btn-success">Читать далее</a>
                     </div>
                 </div>
                 `)
