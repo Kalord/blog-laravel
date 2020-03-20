@@ -2,18 +2,14 @@
 
 @section('title', 'Блог пользователей')
 
-@section('content')  
+@section('content')
     <!-- Blog Details Hero Section Begin -->
-    <section class="blog-hero-section set-bg" data-setbg="/img/blog/details/details-hero.jpg">
+    <section class="blog-hero-section set-bg" data-setbg="{{$post->cover}}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bh-text">
-                        <h2>England Women 1-0 Argentina Women: Jodie Taylor guarantees Lionesses</h2>
-                        <ul>
-                            <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                            <li><i class="fa fa-edit"></i> 3 Comment</li>
-                        </ul>
+                        <h2>{{$post->title}}</h2>
                     </div>
                 </div>
             </div>
@@ -27,54 +23,7 @@
             <div class="row">
                 <div class="col-lg-8 left-blog-pad">
                     <div class="bd-text">
-                        <div class="bd-title">
-                            <p>Argentina had defended stoutly, as they had against Japan in their opening game, but
-                                England finally produced a chance they could not miss in the 61st minute when a counter
-                                found Beth Mead on the left, and her excellent low cross beat both centre-backs allowing
-                                Taylor forward to tap in.</p>
-                            <p>Jill Scott should have doubled the lead soon after but headed Alex Greenwood's delivery
-                                over, before England saw the match out with relative ease to leave them needing just a
-                                point in their final game with Japan, next Wednesday, to top Group D.</p>
-                            <p>Straight from kick off, England looked to dominate against a defensive Argentina side,
-                                but while their build-up was much improved from their shaky win over Scotland last
-                                Sunday, their final ball was still lacking.</p>
-                        </div>
-                        <div class="bd-pic">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img src="/img/blog/details/details-1.jpg" alt="">
-                                </div>
-                                <div class="col-md-8">
-                                    <img src="/img/blog/details/details-2.jpg" alt="">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <img src="/img/blog/details/details-3.jpg" alt="">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <img src="/img/blog/details/details-4.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bd-more-title">
-                            <p>Argentina had defended stoutly, as they had against Japan in their opening game, but
-                                England finally produced a chance they could not miss in the 61st minute when a counter
-                                found Beth Mead on the left, and her excellent low cross beat both centre-backs allowing
-                                Taylor forward to tap in.</p>
-                            <p>Jill Scott should have doubled the lead soon after but headed Alex Greenwood's delivery
-                                over, before England saw the match out with relative ease to leave them needing just a
-                                point in their final game with Japan, next Wednesday, to top Group D.</p>
-                            <p>Straight from kick off, England looked to dominate against a defensive Argentina side,
-                                but while their build-up was much improved from their shaky win over Scotland last
-                                Sunday, their final ball was still lacking.</p>
-                            <p>Jill Scott should have doubled the lead soon after but headed Alex Greenwood's delivery
-                                over, before England saw the match out with relative ease to leave them needing just a
-                                point in their final game with Japan, next Wednesday, to top Group D.</p>
-                            <p>Straight from kick off, England looked to dominate against a defensive Argentina side,
-                                but while their build-up was much improved from their shaky win over Scotland last
-                                Sunday, their final ball was still lacking.</p>
-                        </div>
+                        {!! $post->content !!}
                         <div class="bd-tags">
                             <a href="#">Multipopuse</a>
                             <a href="#">Design</a>
