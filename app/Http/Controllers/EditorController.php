@@ -35,4 +35,9 @@ class EditorController extends Controller
     {
 
     }
+
+    public function demo()
+    {
+
+    }
 }
