@@ -66,14 +66,4 @@ class User extends Authenticatable
         $user = self::where('token', $token)->first();
         return $user ? $user->id : null;
     }
-
-    public static function uploadAvatar(UploadedFile $avatar)
-    {
-        $fileName = Str::random(32) . '.' . $avatar->extension();
-        $avatar->move(public_path(self::AVATAR_DIR), $fileName);
-
-        $user = Auth()->user();
-        $user->avatar = self::AVATAR_DIR . $fileName;
-        $user->save();
-    }
 }
