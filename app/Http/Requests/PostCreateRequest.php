@@ -27,6 +27,9 @@ class PostCreateRequest extends FormRequest
             'title.min'                  => 'Минимальный размер заголовка - 3 символа',
             'title.max'                  => 'Максимальный размер заголовка - 30 символов',
 
+            'cover.required' => 'Неудалось загрузить изображение',
+            'cover.mimes' => 'Файл должен иметь одно из расшерений: jpg, bmp, png',
+
             'id_category.required'          => 'У записи должна быть категория',
             'id_category.min'               => 'Некорректная категория',
             'id_category.max'               => 'Некорректная категория',
@@ -62,6 +65,7 @@ class PostCreateRequest extends FormRequest
 
         return [
             'title'         => 'required|min:3|max:100',
+            'cover'         => 'required|mimes:jpeg,bmp,png',
             'id_category'   => "required|min:$minCategory|max:$maxCategory",
             'selectedTags'  => "min:$minTag|max:$maxTag",
             'content'       => 'required|max:10000'
