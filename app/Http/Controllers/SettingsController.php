@@ -7,12 +7,13 @@ use App\Http\Requests\AvatarUpload;
 use App\Http\Requests\PasswordUpdate;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\UserSettings;
 
 class SettingsController extends Controller
 {
     public function avatarUpdate(AvatarUpload $request)
     {
-        User::uploadAvatar($request->file('avatar'));
+        UserSettings::uploadAvatar($request->file('avatar'));
 
         return [
             'status' => 'success',
