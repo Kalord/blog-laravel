@@ -35,6 +35,6 @@ class PostController extends Controller
 
     public function create(PostCreateRequest $request)
     {
-        return Post::create($request->input());
+        return Post::createPost($request->input(), $request->file());
     }
 }
