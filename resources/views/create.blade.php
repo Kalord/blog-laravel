@@ -5,8 +5,24 @@
 @section('content')
 <div class="container">
 	<div class="text-right my-3">
-		<!--<button class="btn btn-info" id="getHTML" get-data="editor-1">Get HTML</button>-->
+        <div class="title" contenteditable="true" style="text-align: center; background: #fff;">Title</div>
 	</div>
+    <div class="custom-file" style="margin-bottom: 15px;">
+        <input type="file" class="custom-file-input cover" id="customFile">
+        <label class="custom-file-label" for="customFile">Обложка</label>
+    </div>
+    <select class="custom-select category" style="margin-bottom: 15px;">
+        <option selected>Раздел</option>
+        @foreach($categories as $category)
+            <option value="{{$category->id}}">{{$category->title}}</option>
+        @endforeach
+    </select>
+    <div class="tags-list" style="margin-bottom: 15px;">
+        <h3>Выберите теги</h3>
+        @foreach($tags as $tag)
+            <span class="badge badge-light" style="cursor: pointer;" data-id="{{$tag->id}}}">{{$tag->title}}</span>
+        @endforeach
+    </div>
   <div class="row align-items-center justify-content-center">
     <div class="col-md-12 col-lg-8">
 			<div class="editor" id="editor-1" style="background: #fff;">
@@ -50,13 +66,15 @@
       </div>
                 </div>
                 <div class="toolbar">
-                <button class="btn btn-primary publish">Опубликовать</button>
-                <button class="btn btn-primary draft">Добавить в черновик</button>
-                <button class="btn btn-primary view">Предпросмотр</button>
+                <button class="btn btn-primary btn-save" data-type="1">Опубликовать</button>
+                <button class="btn btn-primary btn-save" data-type="0">Добавить в черновик</button>
+                <button class="btn btn-primary btn-save" data-type="view">Предпросмотр</button>
                 </div>
     </div>
   </div>
 </div>
+
+{{@csrf_field()}}
 
 <style>
     body {
@@ -185,6 +203,6 @@
         max-width:100%;
         object-fit:cover;
     }
-    
+
 </style>
 @endsection

@@ -15,6 +15,26 @@ class Post extends Model
 
     const DEFAULT_LIMIT = 10;
 
+    /**
+     * Пост заблокирован
+     */
+    const STATUS_BANNED = 3;
+
+    /**
+     * Пост удален автором
+     */
+    const STATUS_DELETE = 2;
+
+    /**
+     * Пост опубликован, каждый может его смотреть
+     */
+    const STATUS_PUBLISHED = 1;
+
+    /**
+     * Пост находится в черновиках, его может просматривать только автор
+     */
+    const STATUS_DRAFT = 0;
+
     public function category()
     {
         return $this->hasOne('App\Category', 'id', 'id_category')->first();
@@ -37,7 +57,7 @@ class Post extends Model
     }
 
     /**
-     * Данный метод объединяет по ключам id_category и id_user 
+     * Данный метод объединяет по ключам id_category и id_user
      * соответствующие таблицы, затем сохраняет полученные данные
      * в свойства category и user
      */

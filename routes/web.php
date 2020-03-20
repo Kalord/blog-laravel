@@ -51,9 +51,9 @@ Route::get('/profile', 'ProfileController@index')->middleware('auth');
  */
 Route::group(['prefix' => 'settings'], function() {
     Route::get('status', 'SettingsController@statusUpdate')->middleware('auth');
-    
+
     Route::get('age', 'SettingsController@ageUpdate')->middleware('auth');
-    
+
     Route::get('weight', 'SettingsController@weightUpdate')->middleware('auth');
 
     Route::post('avatar', 'SettingsController@avatarUpdate')->middleware('auth');
@@ -62,11 +62,11 @@ Route::group(['prefix' => 'settings'], function() {
 });
 
 Route::group(['prefix' => 'editor'], function() {
-    Route::get('index', 'EditorController@index');
-    Route::get('create', 'EditorController@create');
-    Route::get('update', 'EditorController@update');
-    Route::get('read', 'EditorController@read');
-    Route::get('delete', 'EditorController@delete');
+    Route::get('index', 'EditorController@index')->middleware('auth');;
+    Route::get('create', 'EditorController@create')->middleware('auth');;
+    Route::get('update', 'EditorController@update')->middleware('auth');;
+    Route::get('read', 'EditorController@read')->middleware('auth');;
+    Route::get('delete', 'EditorController@delete')->middleware('auth');;
 });
 
 Route::get('/user/{id}', 'ProfileController@user');

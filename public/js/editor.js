@@ -41,3 +41,45 @@ $(document).ready(function() {
         alert(html);
     });
 });
+
+const selectedTags = () => {
+    return [];
+};
+
+const viewPost = () => {
+
+};
+
+$('.btn-save').click((event) => {
+   let buttonSave = $(event.target);
+   let status = buttonSave.attr('data-type');
+
+   if(status == 'view') {
+       viewPost();
+       return;
+   }
+
+   let formData = new FormData();
+
+    formData.append('title', $('.title').html());
+    formData.append('cover', $('.cover').prop('files')[0]);
+    formData.append('category', $('.category').val());
+    formData.append('selectedTags', selectedTags());
+    formData.append('status', status);
+    formData.append('content', $('#editor').html());
+    formData.append('_token', $('[name="_token"]').val());
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/posts',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        async: false,
+        data: formData,
+        success: (html) => {
+            console.log('Here');
+        }
+    });
+});

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Http\Requests\PostCreateRequest;
 
 class PostController extends Controller
 {
@@ -30,5 +31,10 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->joinTables();
         return $post;
+    }
+
+    public function create(PostCreateRequest $request)
+    {
+        var_dump($request->input());
     }
 }
