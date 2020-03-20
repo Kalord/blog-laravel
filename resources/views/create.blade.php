@@ -54,7 +54,7 @@
         <a href="#" data-command='h2'  data-toggle="tooltip" data-placement="top" title="H2">H2</a>
         <a href="#" data-command='createlink' data-toggle="tooltip" data-placement="top" title="Inser link"><i class='fa fa-link'></i></a>
         <a href="#" data-command='unlink' data-toggle="tooltip" data-placement="top" title="Unlink"><i class='fa fa-unlink'></i></a>
-        <a href="#" data-command='insertimage' data-toggle="tooltip" data-placement="top" title="Insert image"><i class='fa fa-image'></i></a>
+        <a href="#" class="img-load" data-toggle="tooltip" data-placement="top" title="Insert image"><i class='fa fa-image'></i></a>
         <a href="#" data-command='p' data-toggle="tooltip" data-placement="top" title="Paragraph">P</a>
         <a href="#" data-command='subscript' data-toggle="tooltip" data-placement="top" title="Subscript"><i class='fa fa-subscript'></i></a>
         <a href="#" data-command='superscript'  data-toggle="tooltip" data-placement="top" title="Superscript"><i class='fa fa-superscript'></i></a>
@@ -72,6 +72,26 @@
                 </div>
     </div>
   </div>
+</div>
+
+<div class="modal">
+
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input image" id="customFile">
+                <label class="custom-file-label" for="customFile">Картинка</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-dark" style="margin: auto;">Загрузить</button>
+        </div>
+    </div>
+
 </div>
 
 {{@csrf_field()}}
@@ -202,6 +222,73 @@
     {
         max-width:100%;
         object-fit:cover;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        margin: auto;
+        padding: 0;
+        width: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+
+    @-webkit-keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #adaeff;
+        color: white;
+    }
+
+    .modal-body {padding: 2px 16px;}
+
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: #adaeff;
+        color: white;
     }
 
 </style>

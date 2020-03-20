@@ -128,3 +128,11 @@ const toggleSelected = (button) => {
 $('.tag').click((event) => {
     toggleSelected(event.target);
 });
+
+$('.img-load').click((event) => {
+    $('.modal').show();
+});
+
+$('.close').click((event) => {
+    $('.modal').hide();
+});
