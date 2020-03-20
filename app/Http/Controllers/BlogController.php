@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Tag;
+use App\Post;
 
 class BlogController extends Controller
 {
@@ -19,8 +20,11 @@ class BlogController extends Controller
 
     public function detail($id)
     {
+        $post = Post::findOrFail($id);
+
         return view('detail', [
-            'user' => Auth()->user()
+            'user' => Auth()->user(),
+            'post' => $post
         ]);
     }
 }
