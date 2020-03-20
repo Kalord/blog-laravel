@@ -13,6 +13,10 @@ class Post extends Model
      */
     protected $table = 'post';
 
+    protected $fillable = [
+        'title', 'cover', 'id_category', 'status', 'content', 'id_user'
+    ];
+
     const DEFAULT_LIMIT = 10;
 
     /**

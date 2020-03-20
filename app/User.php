@@ -51,9 +51,20 @@ class User extends Authenticatable
         return $this->hasOne('App\UserSettings', 'id_user')->first();
     }
 
+    public function generateToken()
+    {
+        $this->token = Str::random(32);
+    }
+
     public static function findByEmail($email)
     {
         return self::where('email', $email)->first();
+    }
+
+    public static function findIdByToken($token)
+    {
+        $user = self::where('token', $token)->first();
+        return $user ? $user->id : null;
     }
 
     public static function uploadAvatar(UploadedFile $avatar)

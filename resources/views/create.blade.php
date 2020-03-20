@@ -20,7 +20,7 @@
     <div class="tags-list" style="margin-bottom: 15px;">
         <h3>Выберите теги</h3>
         @foreach($tags as $tag)
-            <span class="badge badge-light" style="cursor: pointer;" data-id="{{$tag->id}}}">{{$tag->title}}</span>
+            <span class="badge badge-light tag" style="cursor: pointer;" data-id="{{$tag->id}}">{{$tag->title}}</span>
         @endforeach
     </div>
   <div class="row align-items-center justify-content-center">

@@ -46,6 +46,8 @@ Route::get('/logout', 'UserController@logout')->middleware('auth');
 
 Route::get('/profile', 'ProfileController@index')->middleware('auth');
 
+Route::get('/profile/identity', 'ProfileController@identity')->middleware('auth');
+
 /**
  * Settings for the user
  */

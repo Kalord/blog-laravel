@@ -26,4 +26,9 @@ class ProfileController extends Controller
             'settings' => UserSettings::get($user->id)
         ]);
     }
+
+    public function identity()
+    {
+        return Auth()->user()->token;
+    }
 }

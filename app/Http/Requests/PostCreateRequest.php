@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Category;
 use App\Tag;
 use App\Post;
+use App\User;
 
 class PostCreateRequest extends FormRequest
 {
@@ -26,14 +27,22 @@ class PostCreateRequest extends FormRequest
             'title.min'                  => 'Минимальный размер заголовка - 3 символа',
             'title.max'                  => 'Максимальный размер заголовка - 30 символов',
 
-            'category.required'          => 'У записи должна быть категория',
-            'category.min'               => 'Некорректная категория',
-            'category.max'               => 'Некорректная категория',
+            'id_category.required'          => 'У записи должна быть категория',
+            'id_category.min'               => 'Некорректная категория',
+            'id_category.max'               => 'Некорректная категория',
 
-            'selectedTags.required'      => 'У записи должны быть теги',
+            'selectedTags'               => 'У записи должны быть теги',
             'selectedTags.min'           => 'Некорректные теги',
             'selectedTags.max'           => 'Некорректные теги',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'selectedTags' => explode(',', $this->get('selectedTags')),
+            'id_user'      => User::findIdByToken($this->get('id_user'))
+        ]);
     }
 
     /**
@@ -53,8 +62,8 @@ class PostCreateRequest extends FormRequest
 
         return [
             'title'         => 'required|min:3|max:100',
-            'category'      => "required|min:$minCategory|max:$maxCategory",
-            'selectedTags'  => "required|min:$minTag|max:$maxTag",
+            'id_category'   => "required|min:$minCategory|max:$maxCategory",
+            'selectedTags'  => "min:$minTag|max:$maxTag",
             'content'       => 'required|max:10000'
         ];
     }

@@ -35,6 +35,6 @@ class PostController extends Controller
 
     public function create(PostCreateRequest $request)
     {
-        var_dump($request->input());
+        return Post::create($request->input());
     }
 }

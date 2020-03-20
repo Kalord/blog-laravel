@@ -43,29 +43,54 @@ $(document).ready(function() {
 });
 
 const selectedTags = () => {
-    return [];
+    let tags = $('.tags-list').find('.selected');
+    let ids = [];
+
+    for(let i = 0; i < tags.length; i++)
+    {
+        ids.push($(tags.get(i)).attr('data-id'));
+    }
+
+    return ids;
 };
 
 const viewPost = () => {
 
 };
 
+const identityUser = () => {
+    let identity;
+
+    $.ajax({
+        type: 'GET',
+        url: '/profile/identity',
+        async: false,
+        success: (html) => {
+            identity = html;
+        }
+    });
+
+    return identity;
+};
+
 $('.btn-save').click((event) => {
    let buttonSave = $(event.target);
    let status = buttonSave.attr('data-type');
 
-   if(status == 'view') {
+   if(status === 'view') {
        viewPost();
        return;
    }
 
    let formData = new FormData();
+   let identity = identityUser();
 
     formData.append('title', $('.title').html());
     formData.append('cover', $('.cover').prop('files')[0]);
-    formData.append('category', $('.category').val());
+    formData.append('id_category', $('.category').val());
     formData.append('selectedTags', selectedTags());
     formData.append('status', status);
+    formData.append('id_user', identity);
     formData.append('content', $('#editor').html());
     formData.append('_token', $('[name="_token"]').val());
 
@@ -82,4 +107,24 @@ $('.btn-save').click((event) => {
             console.log('Here');
         }
     });
+});
+
+const toggleSelected = (button) => {
+    button = $(button);
+
+    if(button.hasClass('badge-light'))
+    {
+        button.removeClass('badge-light');
+        button.addClass('badge-primary');
+        button.addClass('selected');
+        return;
+    }
+
+    button.removeClass('badge-primary');
+    button.removeClass('selected');
+    button.addClass('badge-light');
+};
+
+$('.tag').click((event) => {
+    toggleSelected(event.target);
 });
