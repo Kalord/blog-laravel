@@ -42,20 +42,31 @@ const removeSearchStateURL = (key, value) => {
     }
 
     window.history.pushState(null, null, window.location.pathname + currentUrl);
-}
+};
 
-const updatePosts = () => {
+const getCategoryState = () => {
+    let matches = window.location.search.match(/category=(\d+)/);
+
+    if(!matches) return null;
+
+    return matches[1];
+};
+
+const updatePosts = (cleanContainer = false) => {
     let posts = $('.single-item');
-    let last = $(posts.get(posts.length - 1)).attr('data-id');
+
+    let data = {};
+    data.limit = 10;
+    data.last = $(posts.get(posts.length - 1)).attr('data-id');
+    if(getCategoryState()) data.id_category = getCategoryState();
 
     $.ajax({
         type: 'GET',
         url: '/api/posts',
-        data: {
-            limit: 10,
-            pivot: last
-        },
+        data: data,
         success: (html) => {
+            if(cleanContainer) $('.blog-items').empty();
+
             html.forEach(post => {
                 $('.blog-items').append(`
                 <div class="single-item">
@@ -90,6 +101,7 @@ $(document).ready((event) => {
         }
 
         updateSearchStateURL('category', element.attr('data-id'));
+        updatePosts(true);
     });
 
     $('.tag-item').click((event) => {
@@ -103,7 +115,7 @@ $(document).ready((event) => {
 
         element.addClass('active-tag')
         updateSearchStateURL('tag', element.attr('data-id'), false);
-    })
+    });
 
     $('.reset-category').click((event) => {
         let states = window.location.search.slice(1).split('&');
