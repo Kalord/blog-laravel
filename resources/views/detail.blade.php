@@ -25,9 +25,9 @@
                     <div class="bd-text">
                         {!! $post->content !!}
                         <div class="bd-tags">
-                            <a href="#">Multipopuse</a>
-                            <a href="#">Design</a>
-                            <a href="#">Ideas</a>
+                            @foreach($tags as $tag)
+                                <a>{{$tag->title}}</a>
+                            @endforeach
                         </div>
                         <div class="comment-option">
                             <h4>2 Comments</h4>
@@ -92,40 +92,6 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="blog-sidebar">
-                        <div class="bs-categories">
-                            <div class="section-title sidebar-title">
-                                <h5>Categories</h5>
-                            </div>
-                            <ul>
-                                <li><a href="#">Fool Ball</a></li>
-                                <li><a href="#">Soccer</a></li>
-                                <li><a href="#">basketball</a></li>
-                                <li><a href="#">Volleyball</a></li>
-                                <li><a href="#">E-Sport</a></li>
-                            </ul>
-                        </div>
-                        <div class="follow-links">
-                            <div class="section-title sidebar-title">
-                                <h5>Follow</h5>
-                            </div>
-                            <ul>
-                                <li class="facebook">
-                                    <i class="fa fa-facebook"></i>
-                                    <div class="fl-name">Facebook</div>
-                                    <span class="fl-fan">2.530 Fans</span>
-                                </li>
-                                <li class="twitter">
-                                    <i class="fa fa-twitter"></i>
-                                    <div class="fl-name">Twitter</div>
-                                    <span class="fl-fan">2.046 Fans</span>
-                                </li>
-                                <li class="google">
-                                    <i class="fa fa-google"></i>
-                                    <div class="fl-name">Google</div>
-                                    <span class="fl-fan">1.170 Fans</span>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="bs-recent">
                             <div class="section-title sidebar-title">
                                 <h5>Recent Post</h5>
@@ -177,19 +143,6 @@
                                         <li><i class="fa fa-edit"></i> 3 Comment</li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="bs-popular-tag">
-                            <div class="section-title sidebar-title">
-                                <h5>Popular Tag</h5>
-                            </div>
-                            <div class="tags">
-                                <a href="#">Seagame</a>
-                                <a href="#">Fifa</a>
-                                <a href="#">World Cup 2019</a>
-                                <a href="#">Championship</a>
-                                <a href="#">2019</a>
-                                <a href="#">Qatar</a>
                             </div>
                         </div>
                     </div>

@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Http\Requests\PostCreateRequest;
+use App\DataProvider\PostFindOptions;
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $limit = $request->input('limit') ? $request->input('limit') : Post::DEFAULT_LIMIT;
-        $pivot = $request->input('pivot') ? $request->input('pivot') : null;
+        $postFindOptions = new PostFindOptions();
+        $postFindOptions->load($request->input());
 
-        $posts = Post::findByOptions($limit, $pivot);
+        $posts = Post::findByOptions($postFindOptions);
         foreach($posts as &$post) $post->joinTables();
 
         return $posts;
