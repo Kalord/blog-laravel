@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PostTag;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Tag;
@@ -21,10 +22,12 @@ class BlogController extends Controller
     public function detail($id)
     {
         $post = Post::findOrFail($id);
+        $tags = PostTag::getTagsByPost($id);
 
         return view('detail', [
             'user' => Auth()->user(),
-            'post' => $post
+            'post' => $post,
+            'tags' => $tags
         ]);
     }
 }
