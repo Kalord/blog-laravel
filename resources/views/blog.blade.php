@@ -23,19 +23,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 left-blog-pad">
-                <div class="large-blog set-bg" data-setbg="img/blog/blog-1.jpg">
-                    <div class="bi-tag">Soccer</div>
-                    <div class="bi-text">
-                        <h3><a href="./blog-details.html">England Women 1-0 Argentina Women: Taylor guarantees Lionesses' path to last
-                                16</a></h3>
-                        <ul>
-                            <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                            <li><i class="fa fa-edit"></i> 3 Comment</li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="blog-items">
-                    
+
                 </div>
                 <div class="more-blog">
                     <a href="#">Загрузить еще</a>
@@ -56,26 +45,7 @@
 
                     </div>
                     <div class="follow-links">
-                        <div class="section-title sidebar-title">
-                            <h5>Follow</h5>
-                        </div>
-                        <ul>
-                            <li class="facebook">
-                                <i class="fa fa-facebook"></i>
-                                <div class="fl-name">Facebook</div>
-                                <span class="fl-fan">2.530 Fans</span>
-                            </li>
-                            <li class="twitter">
-                                <i class="fa fa-twitter"></i>
-                                <div class="fl-name">Twitter</div>
-                                <span class="fl-fan">2.046 Fans</span>
-                            </li>
-                            <li class="google">
-                                <i class="fa fa-google"></i>
-                                <div class="fl-name">Google</div>
-                                <span class="fl-fan">1.170 Fans</span>
-                            </li>
-                        </ul>
+
                     </div>
                     <div class="bs-recent">
                         <div class="section-title sidebar-title">

@@ -66,6 +66,9 @@
       </div>
                 </div>
                 <div class="toolbar">
+                    <div class="alert alert-success alert-save-post" role="alert" style="display: none;">
+                        Запись сохранена
+                    </div>
                 <button class="btn btn-primary btn-save" data-type="1">Опубликовать</button>
                 <button class="btn btn-primary btn-save" data-type="0">Добавить в черновик</button>
                 <button class="btn btn-primary btn-save" data-type="view">Предпросмотр</button>
