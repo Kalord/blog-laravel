@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use \App\DataProvider\PostFindOptions;
 
 class Post extends Model
 {
@@ -42,6 +43,11 @@ class Post extends Model
      */
     const STATUS_DRAFT = 0;
 
+    public function bindSelectedTags(Array $selectedTags)
+    {
+        PostTag::createRation($this->id, $selectedTags);
+    }
+
     public static function createPost($data, $files)
     {
         if(key_exists('cover', $files))
@@ -52,7 +58,14 @@ class Post extends Model
             $data['cover'] = $fileName;
         }
 
-        return parent::create($data);
+        $post = parent::create($data);
+
+        if(key_exists('selectedTags', $data) && $post)
+        {
+            $post->bindSelectedTags($data['selectedTags']);
+        }
+
+        return $post;
     }
 
     public function category()
@@ -78,12 +91,19 @@ class Post extends Model
         $this->user = $this->user();
     }
 
-    public static function findByOptions($limit = self::DEFAULT_LIMIT, $pivot = null)
+    public static function findByOptions(PostFindOptions $postFindOptions)
     {
         $state = self::orderBy('id', 'desc')->
-                       limit($limit);
+                       limit($postFindOptions->limit);
 
-        if($pivot) $state->where('id', '<', $pivot);
+        //START TODO: Refactoring
+        if($postFindOptions->start)
+            $state->where('id', '<', $postFindOptions->start);
+
+        if($postFindOptions->id_category)
+            $state->where('id_category', $postFindOptions->id_category);
+        //END TODO
+
         return $state->get();
     }
 
