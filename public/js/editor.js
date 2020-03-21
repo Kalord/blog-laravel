@@ -84,11 +84,17 @@ $('.btn-save').click((event) => {
 
    let formData = new FormData();
    let identity = identityUser();
+   let tags = selectedTags();
 
     formData.append('title', $('.title').html());
     formData.append('cover', $('.cover').prop('files')[0]);
     formData.append('id_category', $('.category').val());
-    formData.append('selectedTags', selectedTags());
+
+    if(tags.length)
+    {
+        formData.append('selectedTags', tags);
+    }
+
     formData.append('status', status);
     formData.append('id_user', identity);
     formData.append('content', $('#editor').html());
@@ -104,7 +110,12 @@ $('.btn-save').click((event) => {
         async: false,
         data: formData,
         success: (html) => {
-            console.log('Here');
+            setTimeout(() => {
+                window.location.href = `/blog/detail/${html.id}`;
+            }, 300);
+
+            $('.alert').hide();
+            $('.alert-save-post').show();
         }
     });
 });
