@@ -32,6 +32,7 @@ class UserController extends Controller
     /**
      * Запоминание пользователя в системе
      * @param UserStart $request
+     * @return array
      */
     public function start(UserStart $request)
     {
@@ -58,7 +59,11 @@ class UserController extends Controller
      */
     public function create(UserCreate $request)
     {
-        $request->merge(['password' => Hash::make($request->input('password'))]);
+        $request->merge([
+            'password' => Hash::make($request->input('password')),
+            'token'    => User::generateToken()
+        ]);
+
         return UserRepository::userCreate($request->input());
     }
 }
