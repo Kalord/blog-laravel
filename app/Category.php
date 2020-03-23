@@ -19,4 +19,9 @@ class Category extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public static function getIdByTitle($title)
+    {
+        return self::select('id')->where('title', $title)->first()->id;
+    }
 }
