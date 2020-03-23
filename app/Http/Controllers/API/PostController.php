@@ -31,7 +31,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->incrementView();
-        
+
         $post->joinTables();
         return $post;
     }

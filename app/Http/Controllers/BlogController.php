@@ -13,21 +13,25 @@ class BlogController extends Controller
     public function index()
     {
         return view('blog', [
-            'user'       => Auth()->user(),
-            'categories' => Category::all(),
-            'tags'       => Tag::all()
+            'user'           => Auth()->user(),
+            'categories'     => Category::all(),
+            'tags'           => Tag::all(),
+            'recommendation' => Post::getRecommendation()
         ]);
     }
 
     public function detail($id)
     {
         $post = Post::findOrFail($id);
+        $post->incrementView();
+
         $tags = PostTag::getTagsByPost($id);
 
         return view('detail', [
-            'user' => Auth()->user(),
-            'post' => $post,
-            'tags' => $tags
+            'user'           => Auth()->user(),
+            'post'           => $post,
+            'tags'           => $tags,
+            'recommendation' => Post::getRecommendation()
         ]);
     }
 }
