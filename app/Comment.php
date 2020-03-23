@@ -20,14 +20,12 @@ class Comment extends Model
      */
     public $timestamps = false;
 
-    const DEFAULT_LIMIT = 10;
-
-    public static function getCommentsByIdPost($id_post, $start = null)
+    public static function getCommentsByIdPost($id_post, $limit = 10, $pivot = null)
     {
         $state = self::where('id_post', $id_post);
 
-        if($start) $state->where('id', $start);
+        if($pivot) $state->where('id', $pivot);
 
-        return $state->orderBy('id', 'desc')->limit(self::DEFAULT_LIMIT)->get();
+        return $state->orderBy('id', 'desc')->limit($limit)->get();
     }
 }
