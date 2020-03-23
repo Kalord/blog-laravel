@@ -1,4 +1,6 @@
 /**
+ * Обновление URL в соответствии с поисковыми параметрами
+ *
  * @param {string} key
  * @param {string} value
  * @param {bool} replaceInCaseExists
@@ -15,7 +17,7 @@ const updateSearchStateURL = (key, value, replaceInCaseExists = true) => {
         let regExp = new RegExp(`${key}=\\d+`);
         currentUrl = currentUrl.replace(regExp, `${key}=${value}`);
     }
-    //Conc
+    //Concatenation
     else {
         currentUrl += `&${key}=${value}`;
     }
@@ -24,6 +26,8 @@ const updateSearchStateURL = (key, value, replaceInCaseExists = true) => {
 };
 
 /**
+ * Удаление URL параметров
+ *
  * @param {string} key
  * @param {string} value
  */
@@ -32,9 +36,9 @@ const removeSearchStateURL = (key, value) => {
     let states = currentUrl.slice(1).split('&');
     let index = `${key}=${value}`;
 
-    if (states.length == 1) {
+    if (states.length === 1) {
         currentUrl = '';
-    } else if (states.indexOf(index) == 0) {
+    } else if (states.indexOf(index) === 0) {
         currentUrl = currentUrl.replace(index, '');
         currentUrl = currentUrl.replace('?&', '?');
     } else {
@@ -44,6 +48,11 @@ const removeSearchStateURL = (key, value) => {
     window.history.pushState(null, null, window.location.pathname + currentUrl);
 };
 
+/**
+ * Получение категории для поиска
+ *
+ * @returns {string|null}
+ */
 const getCategoryState = () => {
     let matches = window.location.search.match(/category=(\d+)/);
 
@@ -52,58 +61,74 @@ const getCategoryState = () => {
     return matches[1];
 };
 
-const updatePosts = (cleanContainer = false) => {
-    let posts = $('.single-item');
+/**
+ * Отсчистка контейнера с публикациями
+ */
+const cleanPostsContainer = () => {
+    $('.blog-items').empty();
+};
 
-    let data = {};
-    data.limit = 10;
-    data.last = $(posts.get(posts.length - 1)).attr('data-id');
-    if(getCategoryState()) data.id_category = getCategoryState();
-
-    $.ajax({
-        type: 'GET',
-        url: '/api/posts',
-        data: data,
-        success: (html) => {
-            if(cleanContainer) $('.blog-items').empty();
-
-            html.forEach(post => {
-                $('.blog-items').append(`
-                <div class="single-item">
-                    <div class="bi-pic">
-                        <img src="${post.cover}" alt="" style="width: 300px;">
-                    </div>
-                    <div class="bi-text">
-                    <h4><a href="/blog/detail/${post.id}">${post.title}</a></h4>
-                    <ul>
-                        <li>${post.user.name}</li>
-                        <li>${post.category.title}</li>
-                    </ul>
-                    <p>It’s that time again when people start thinking about their New Years Resolutions.
-                       Usually they involve, losing weight, quitting smoking, and joining a gym, just to
-                        mention a few.
-                    </p>
-                    <a href="/blog/detail/${post.id}" class="btn btn-success">Читать далее</a>
-                    </div>
-                </div>
-                `)
-            });
-        }
-    })
+/**
+ * Обновление контейнера с публикациями
+ */
+const updatePosts = () => {
+    /**
+     * Лимит выборки постов
+     * @type {number}
+     */
+    let limit       = 10;
+    /**
+     * Опорный идентификатор после которого начинается выборка
+     * @type {null|undefined|jQuery}
+     */
+    let pivot       = $('.single-item').last().attr('data-id');
+    /**
+     * Категория
+     * @type {string}
+     */
+    let id_category = getCategoryState();
+    /**
+     * Обработчик успешного запроса
+     * @param posts
+     */
+    let successCallback = (posts) => {
+        posts.filter(post => {
+            singlePostTemplate(post);
+        })
+    };
+    /**
+     * Обработчик провального запроса
+     * @param error
+     */
+    let errorCallback = (error) =>  {
+        console.log(error);
+    };
+    /**
+     * Инициация запроса
+     */
+    getPostsRequest(successCallback, errorCallback, limit, pivot, id_category);
 };
 
 $(document).ready((event) => {
+    /**
+     * Событие нажатия на поисковой фильтр по категориям
+     */
     $('.item-category').click((event) => {
         let element = $(event.target);
 
-        while (element.prop('tagName') != 'LI') {
+        while (element.prop('tagName') !== 'LI') {
             element = element.parent();
         }
 
         updateSearchStateURL('category', element.attr('data-id'));
-        updatePosts(true);
+        cleanPostsContainer();
+        updatePosts();
     });
 
+    /**
+     * Событие нажатия на поисковой фильтр по тегам
+     * TODO: Доделать
+     */
     $('.tag-item').click((event) => {
         let element = $(event.target);
 
@@ -113,10 +138,14 @@ $(document).ready((event) => {
             return;
         }
 
-        element.addClass('active-tag')
+        element.addClass('active-tag');
         updateSearchStateURL('tag', element.attr('data-id'), false);
     });
 
+    /**
+     * Сброс категорий
+     * TODO: Доделать
+     */
     $('.reset-category').click((event) => {
         let states = window.location.search.slice(1).split('&');
         let regExp = new RegExp(/category=\d+/);
@@ -126,6 +155,13 @@ $(document).ready((event) => {
                 states.shift(states.indexOf(state));
             }
         });
+    });
+
+    /**
+     * Подгрузка публикаций
+     */
+    $('.more-blog').click((event) => {
+        updatePosts();
     });
 
     updatePosts();
