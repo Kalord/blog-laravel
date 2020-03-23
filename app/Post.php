@@ -19,7 +19,7 @@ class Post extends Model
         'title', 'cover', 'id_category', 'status', 'content', 'id_user'
     ];
 
-    const DEFAULT_LIMIT = 10;
+    const RECOMMENDATION_LIMIT = 10;
 
     const COVER_DIR = '/uploads/covers/';
 
@@ -91,14 +91,25 @@ class Post extends Model
         $this->user = $this->user();
     }
 
+    public function incrementView()
+    {
+        $this->views++;
+        $this->save();
+    }
+
+    public static function getRecommendation()
+    {
+        return self::orderBy('views', 'desc')->limit(self::RECOMMENDATION_LIMIT)->get();
+    }
+
     public static function findByOptions(PostFindOptions $postFindOptions)
     {
         $state = self::orderBy('id', 'desc')->
                        limit($postFindOptions->limit);
 
         //START TODO: Refactoring
-        if($postFindOptions->start)
-            $state->where('id', '<', $postFindOptions->start);
+        if($postFindOptions->pivot)
+            $state->where('id', '<', $postFindOptions->pivot);
 
         if($postFindOptions->id_category)
             $state->where('id_category', $postFindOptions->id_category);
@@ -114,5 +125,14 @@ class Post extends Model
         if($start) $state->where('id', '<', $start);
 
         return $state->orderBy('id', 'desc')->limit($limit)->get();
+    }
+
+    public static function getPopularPostsByIdUser($id_user, $id_category = null, $limit = 3)
+    {
+        $state = self::where('id_user', $id_user)->orderBy('views', 'desc')->limit($limit);
+
+        if($id_category) $state->where('id_category', $id_category);
+
+        return $state->get();
     }
 }
