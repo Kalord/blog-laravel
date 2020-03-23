@@ -51,9 +51,9 @@ class User extends Authenticatable
         return $this->hasOne('App\UserSettings', 'id_user')->first();
     }
 
-    public function generateToken()
+    public static function generateToken()
     {
-        $this->token = Str::random(32);
+        return Str::random(32);
     }
 
     public static function findByEmail($email)
