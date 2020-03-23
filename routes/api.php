@@ -27,4 +27,7 @@ Route::group(['prefix' => 'posts'], function() {
     Route::get('/', '\App\Http\Controllers\API\PostController@index');
     Route::get('/{id}', '\App\Http\Controllers\API\PostController@show');
     Route::post('/', '\App\Http\Controllers\API\PostController@create');
+
+    Route::get('/{id}/comments', '\App\Http\Controllers\API\CommentController@show');
+    Route::post('/{id}/comments', '\App\Http\Controllers\API\CommentController@create');
 });
