@@ -14,7 +14,7 @@ class PostFindOptions implements IDataProvider
     /**
      * @var int
      */
-    public $start;
+    public $pivot;
 
     /**
      * @var int
@@ -32,9 +32,12 @@ class PostFindOptions implements IDataProvider
      */
     public function load(Array $data)
     {
-        foreach ($data as $key => $value)
+        foreach ($data as $property => $value)
         {
-            $this->$key = $value;
+            if(property_exists($this, $property))
+            {
+                $this->$property = $value;
+            }
         }
     }
 }
