@@ -64,7 +64,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2">
-                        
+
                     </div>
                     <div class="col-lg-10">
                         <div class="nav-menu">
@@ -91,6 +91,11 @@
     <!-- Header End -->
 
     @yield('content')
+
+    <!-- Refactoring list -->
+    <script src="js/api/common.js"></script>
+    <script src="js/api/posts.js"></script>
+    <script src="js/templates/singlePostTemplate.js"></script>
 
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>

@@ -26,8 +26,8 @@
                 <div class="blog-items">
 
                 </div>
-                <div class="more-blog">
-                    <a href="#">Загрузить еще</a>
+                <div class="more-blog" style="cursor: pointer;">
+                    <a>Загрузить еще</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -38,7 +38,9 @@
                         </div>
                         <ul>
                             @foreach($categories as $category)
-                            <li class="item-category" data-id="{{$category->id}}"><a style="cursor: pointer;">{{$category->title}}</a></li>
+                            <li class="item-category" data-id="{{$category->id}}">
+                                <a style="cursor: pointer;">{{$category->title}}</a>
+                            </li>
                             @endforeach
                             <li class="reset-category"><a style="cursor: pointer;">Сбросить поисковой фильтр</a></li>
                         </ul>
@@ -51,54 +53,16 @@
                         <div class="section-title sidebar-title">
                             <h5>Рекомендации</h5>
                         </div>
+                        @foreach($recommendation as $post)
                         <div class="news-item">
                             <div class="ni-pic">
-                                <img src="img/news/ln-1.jpg" alt="">
+                                <img src="{{$post->cover}}" alt="" style="width: 250px; height: 150px">
                             </div>
                             <div class="ni-text">
-                                <h5><a href="#">How To Quit Smoking Using Zyban</a></h5>
-                                <ul>
-                                    <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                    <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                </ul>
+                                <h5><a href="/blog/detail/{{$post->id}}">{{$post->title}}</a></h5>
                             </div>
                         </div>
-                        <div class="news-item">
-                            <div class="ni-pic">
-                                <img src="img/news/ln-2.jpg" alt="">
-                            </div>
-                            <div class="ni-text">
-                                <h5><a href="#">Decorate For Less With Art Posters</a></h5>
-                                <ul>
-                                    <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                    <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="news-item">
-                            <div class="ni-pic">
-                                <img src="img/news/ln-3.jpg" alt="">
-                            </div>
-                            <div class="ni-text">
-                                <h5><a href="#">Home Business Advertising Ideas</a></h5>
-                                <ul>
-                                    <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                    <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="news-item">
-                            <div class="ni-pic">
-                                <img src="img/news/ln-4.jpg" alt="">
-                            </div>
-                            <div class="ni-text">
-                                <h5><a href="#">Lasik Doesn T Stop Your Eyes From Aging</a></h5>
-                                <ul>
-                                    <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                    <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="bs-popular-tag">
                         <div class="section-title sidebar-title">

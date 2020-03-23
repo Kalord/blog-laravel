@@ -94,56 +94,18 @@
                     <div class="blog-sidebar">
                         <div class="bs-recent">
                             <div class="section-title sidebar-title">
-                                <h5>Recent Post</h5>
+                                <h5>Рекомендации</h5>
                             </div>
-                            <div class="news-item">
-                                <div class="ni-pic">
-                                    <img src="/img/news/ln-1.jpg" alt="">
+                            @foreach($recommendation as $post)
+                                <div class="news-item">
+                                    <div class="ni-pic">
+                                        <img src="{{$post->cover}}" alt="" style="width: 250px; height: 150px">
+                                    </div>
+                                    <div class="ni-text">
+                                        <h5><a href="/blog/detail/{{$post->id}}">{{$post->title}}</a></h5>
+                                    </div>
                                 </div>
-                                <div class="ni-text">
-                                    <h5><a href="#">How To Quit Smoking Using Zyban</a></h5>
-                                    <ul>
-                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-item">
-                                <div class="ni-pic">
-                                    <img src="/img/news/ln-2.jpg" alt="">
-                                </div>
-                                <div class="ni-text">
-                                    <h5><a href="#">Decorate For Less With Art Posters</a></h5>
-                                    <ul>
-                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-item">
-                                <div class="ni-pic">
-                                    <img src="/img/news/ln-3.jpg" alt="">
-                                </div>
-                                <div class="ni-text">
-                                    <h5><a href="#">Home Business Advertising Ideas</a></h5>
-                                    <ul>
-                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-item">
-                                <div class="ni-pic">
-                                    <img src="/img/news/ln-4.jpg" alt="">
-                                </div>
-                                <div class="ni-text">
-                                    <h5><a href="#">Lasik Doesn T Stop Your Eyes From Aging</a></h5>
-                                    <ul>
-                                        <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                        <li><i class="fa fa-edit"></i> 3 Comment</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

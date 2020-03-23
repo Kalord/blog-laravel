@@ -140,10 +140,11 @@
 <section class="container">
 	<div class="row">
 		<div class="col-md-8 col-sm-12">
+            @if($advice)
 			<div class="education">
 				<h2 class="white">Советы</h2>
 
-                @foreach($posts as $post)
+                @foreach($advice as $post)
                     <div class="education-content" style="border: 3px solid #17a2b8; padding: 12px; border-radius: 15px;">
                         <h4 class="education-title accent">{{$post->title}}</h4>
                         <div class="education-school">
@@ -159,6 +160,7 @@
 
 				<a class="btn btn-success">Больше</a>
 			</div>
+            @endif
 		</div>
 	</div>
 </section>
@@ -167,21 +169,27 @@
 <section class="container">
 	<div class="row">
 		<div class="col-md-8 col-sm-12">
+            @if($recipe)
 			<div class="education">
 				<h2 class="white">Рецепт</h2>
-				<div class="education-content" style="border: 3px solid #17a2b8; padding: 12px; border-radius: 15px;">
-					<h4 class="education-title accent">New Web Design</h4>
-					<div class="education-school">
-						<img src="https://picsum.photos/1024/768" style="width: 100%;">
-					</div>
-					<p class="education-description">In lacinia leo sed quam feugiat, ac efficitur dui tristique. Ut venenatis, odio quis cursus egestas, nulla sem volutpat diam, ac dapibus nisl ipsum ut ipsum. Nunc tincidunt libero non magna placerat elementum.</p>
-					<a class="btn btn-info">Читать полностью</a>
-				</div>
 
-				<br>
+                @foreach($recipe as $post)
+                    <div class="education-content" style="border: 3px solid #17a2b8; padding: 12px; border-radius: 15px;">
+                        <h4 class="education-title accent">{{$post->title}}</h4>
+                        <div class="education-school">
+                            <img src="{{$post->cover}}" style="width: 100%;">
+                        </div>
+                        <p class="education-description">In lacinia leo sed quam feugiat, ac efficitur dui tristique. Ut venenatis, odio quis cursus egestas, nulla sem volutpat diam, ac dapibus nisl ipsum ut ipsum. Nunc tincidunt libero non magna placerat elementum.</p>
+                        <a href="/blog/detail/{{$post->id}}" class="btn btn-info">Читать полностью</a>
+                    </div>
+
+                    <br>
+
+                @endforeach
 
 				<a class="btn btn-success">Больше</a>
 			</div>
+            @endif
 		</div>
 	</div>
 </section>
