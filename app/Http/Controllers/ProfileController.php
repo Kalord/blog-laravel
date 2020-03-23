@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserSettings;
 use App\Post;
+use App\Category;
 
 class ProfileController extends Controller
 {
     public function index()
     {
         return view('profile', [
-            'user'  => Auth()->user(),
-            'posts' => Post::findPostByIdUser(Auth()->id())
+            'user'   => Auth()->user(),
+            'advice' => Post::getPopularPostsByIdUser(Auth()->id(), Category::getIdByTitle('advice')),
+            'recipe' => Post::getPopularPostsByIdUser(Auth()->id(), Category::getIdByTitle('recipe'))
         ]);
     }
 
@@ -24,7 +26,8 @@ class ProfileController extends Controller
         return view('profile', [
             'user'      => $user,
             'settings'  => UserSettings::get($user->id),
-            'posts'     => Post::findPostByIdUser($user->id)
+            'advice' => Post::getPopularPostsByIdUser(Auth()->id(), Category::getIdByTitle('advice')),
+            'recipe' => Post::getPopularPostsByIdUser(Auth()->id(), Category::getIdByTitle('recipe'))
         ]);
     }
 
