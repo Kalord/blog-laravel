@@ -104,15 +104,20 @@ class Post extends Model
 
     public static function findByOptions(PostFindOptions $postFindOptions)
     {
-        $state = self::orderBy('id', 'desc')->
+        $state = self::orderBy('post.id', 'desc')->
+                       select('post.*', 'category.title as category_title')->
+                       join('category', 'post.id_category', '=', 'category.id')->
                        limit($postFindOptions->limit);
 
         //START TODO: Refactoring
         if($postFindOptions->pivot)
-            $state->where('id', '<', $postFindOptions->pivot);
+            $state->where('post.id', '<', $postFindOptions->pivot);
 
         if($postFindOptions->id_category)
             $state->where('id_category', $postFindOptions->id_category);
+
+        if($postFindOptions->id_user)
+            $state->where('id_user', $postFindOptions->id_user);
         //END TODO
 
         return $state->get();
@@ -134,5 +139,10 @@ class Post extends Model
         if($id_category) $state->where('id_category', $id_category);
 
         return $state->get();
+    }
+
+    public static function countViewsByIdUser($id_user)
+    {
+        return self::where('id_user', $id_user)->sum('views');
     }
 }
