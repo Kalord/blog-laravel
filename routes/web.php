@@ -64,9 +64,9 @@ Route::group(['prefix' => 'settings'], function() {
 });
 
 Route::group(['prefix' => 'editor'], function() {
-    Route::get('index', 'EditorController@index')->middleware('auth');
+    Route::get('', 'EditorController@index')->middleware('auth');
     Route::get('create', 'EditorController@create')->middleware('auth');
-    Route::get('update', 'EditorController@update')->middleware('auth');
+    Route::get('update/{id}', 'EditorController@update')->middleware('auth');
     Route::get('read', 'EditorController@read')->middleware('auth');
     Route::get('delete', 'EditorController@delete')->middleware('auth');
     Route::get('demo', 'EditorController@demo')->middleware('auth');

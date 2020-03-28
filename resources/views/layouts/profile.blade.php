@@ -32,6 +32,9 @@ http://www.templatemo.com/tm-467-easy-profile
 <script src="/js/jquery.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.backstretch.min.js"></script>
+
+<script src="/js/api/posts.js"></script>
+
 <script src="/js/custom.js"></script>
 <script src="/js/errors.js"></script>
 <script src="/js/profile.js"></script>
