@@ -46,8 +46,7 @@ const selectedTags = () => {
     let tags = $('.tags-list').find('.selected');
     let ids = [];
 
-    for(let i = 0; i < tags.length; i++)
-    {
+    for (let i = 0; i < tags.length; i++) {
         ids.push($(tags.get(i)).attr('data-id'));
     }
 
@@ -74,24 +73,23 @@ const identityUser = () => {
 };
 
 $('.btn-save').click((event) => {
-   let buttonSave = $(event.target);
-   let status = buttonSave.attr('data-type');
+    let buttonSave = $(event.target);
+    let status = buttonSave.attr('data-type');
 
-   if(status === 'view') {
-       viewPost();
-       return;
-   }
+    if (status === 'view') {
+        viewPost();
+        return;
+    }
 
-   let formData = new FormData();
-   let identity = identityUser();
-   let tags = selectedTags();
+    let formData = new FormData();
+    let identity = identityUser();
+    let tags = selectedTags();
 
     formData.append('title', $('.title').html());
     formData.append('cover', $('.cover').prop('files')[0]);
     formData.append('id_category', $('.category').val());
 
-    if(tags.length)
-    {
+    if (tags.length) {
         formData.append('selectedTags', tags);
     }
 
@@ -123,8 +121,7 @@ $('.btn-save').click((event) => {
 const toggleSelected = (button) => {
     button = $(button);
 
-    if(button.hasClass('badge-light'))
-    {
+    if (button.hasClass('badge-light')) {
         button.removeClass('badge-light');
         button.addClass('badge-primary');
         button.addClass('selected');
@@ -147,3 +144,32 @@ $('.img-load').click((event) => {
 $('.close').click((event) => {
     $('.modal').hide();
 });
+
+/**
+ * Отображение публикаций
+ */
+if ($('.editor-index').get(0)) {
+    const successCallback = (html) => {
+        html.forEach(post => {
+            $('.table-body').append(`
+            <tr>
+            <td data-label="Contact ID">
+                ${post.title}
+            </td>
+            <td data-label="Power">${post.category_title}</td>
+            <td data-label="Expiration">${post.views}</td>
+            <td data-label="Value">
+                <a href="/blog/detail/${post.id}" class="btn btn__active">Просмотр</a> 
+                <a href="/editor/update/${post.id}" class="btn btn__active">Изменить</a>
+                <a class="btn btn__active delete-button">Удалить</a>
+            </td>
+            </tr>
+        `);
+        });
+    };
+    const errorCallback = (html) => {
+        console.log(html);
+    }
+
+    getPostsRequest(successCallback, errorCallback, 10, identityUser());
+}
