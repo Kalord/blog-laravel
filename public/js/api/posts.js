@@ -4,6 +4,7 @@
 
 const RESOURCE = '/api/posts';
 const GET = 'GET';
+const POST = 'POST';
 
 /**
  * Получение списка постов
@@ -39,6 +40,21 @@ const getPostRequest = (id, successCallback, errorCallback) => {
     $.ajax({
         type: GET,
         url: `${RESOURCE}/${id}`,
+        success: successCallback,
+        error: errorCallback
+    });
+};
+
+const createPostRequest = (data, successCallback, errorCallback) => {
+    $.ajax({
+        type: POST,
+        url: RESOURCE,
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        async: false,
+        data: data,
         success: successCallback,
         error: errorCallback
     });
