@@ -7,8 +7,6 @@ $('.avatar-update').click((event) => {
     formData.append('avatar', file);
     formData.append('_token', $('[name="_token"]').val());
 
-    console.log(formData);
-
     $.ajax({
         type: 'POST',
         url: '/settings/avatar',
