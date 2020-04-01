@@ -22,6 +22,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 left-blog-pad">
+                  <div class="stars-container">
+                      <div class="stars">
+                          <span>Ваша оценка: </span>
+                          @for($i = 0; $i < $selectedStars; $i++)
+                            <i class="fa fa-star star selected-star"></i>
+                          @endfor
+
+                          @for($i = 0; $i < $unselectedStars; $i++)
+                            <i class="fa fa-star star"></i>
+                          @endfor
+                      </div>
+                  </div>
                     <div class="bd-text">
                         {!! $post->content !!}
                         <div class="bd-tags">
@@ -99,10 +111,10 @@
                             @foreach($recommendation as $post)
                                 <div class="news-item">
                                     <div class="ni-pic">
-                                        <img src="{{$post->cover}}" alt="" style="width: 250px; height: 150px">
-                                    </div>
-                                    <div class="ni-text">
-                                        <h5><a href="/blog/detail/{{$post->id}}">{{$post->title}}</a></h5>
+                                        <a href="/blog/detail/{{$post->id}}">
+                                            <img src="{{$post->cover}}" alt="" style="width: 250px; height: 150px">
+                                        </a>
+                                        <h5><a class="recommend-link" href="/blog/detail/{{$post->id}}">{{$post->title}}</a></h5>
                                     </div>
                                 </div>
                             @endforeach
@@ -114,3 +126,19 @@
     </section>
     <!-- Blog Details Section End -->
 @endsection
+<style>
+    .recommend-link {
+        color: #000;
+        text-align: center;
+        margin-left: 27%;
+    }
+    .recommend-link:hover {
+        color: #8034eb;
+    }
+    .star {
+        cursor: pointer;
+    }
+    .selected-star {
+        color: #ebeb34;
+    }
+</style>

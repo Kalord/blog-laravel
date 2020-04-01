@@ -166,3 +166,34 @@ $(document).ready((event) => {
 
     updatePosts();
 });
+
+const getIdCurrentPost = () => {
+    let result = window.location.href.match(/\d+$/);
+
+    return result ? result[0] : null;
+}
+
+/**
+ * Stars
+ **/
+$('.star').click((event) => {
+    $('.star').removeClass('selected-star');
+    let star = $(event.target);
+    let stars = 0;
+
+    while(star.hasClass('star'))
+    {
+        star.addClass('selected-star');
+        stars++;
+        star = star.prev();
+    }
+
+    $.ajax({
+        type: 'GET',
+        url: '/blog/stars',
+        data: {
+            id_post: getIdCurrentPost(),
+            stars: stars
+        }
+    });
+})
