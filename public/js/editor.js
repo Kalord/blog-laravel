@@ -1,6 +1,35 @@
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 });
+
+/**
+ * Файлы для загрузки
+ **/
+let imgs = [];
+
+const getEditorData = (status) => {
+    let formData = new FormData();
+    let identity = identityUser();
+    let tags = selectedTags();
+
+    formData.append('title', $('.title').html());
+    formData.append('description', $('.description').html());
+    formData.append('cover', $('.cover').prop('files')[0]);
+    formData.append('id_category', $('.category').val());
+
+    if (tags.length) {
+        formData.append('selectedTags', tags);
+    }
+
+    formData.append('status', status);
+    formData.append('id_user', identity);
+    formData.append('content', $('#editor').html());
+    formData.append('_token', $('[name="_token"]').val());
+    formData.append('imgs', imgs);
+
+    return formData;
+};
+
 $(document).ready(function() {
     var colorPalette = ['000000', 'FF9966', '6699FF', '99FF66', 'CC0000', '00CC00', '0000CC', '333333', '0066FF', 'FFFFFF'],
         forePalette = $('.fore-palette'),
@@ -73,49 +102,40 @@ const identityUser = () => {
 };
 
 $('.btn-save').click((event) => {
+    /**
+     * Текущая нажатая кнопка
+     */
     let buttonSave = $(event.target);
-    let status = buttonSave.attr('data-type');
-
+    /**
+     * Предпросмотры
+     */
     if (status === 'view') {
         viewPost();
         return;
     }
+    /**
+     * Обработчик успешного запроса
+     */
+    const successCallback = (html) => {
+        setTimeout(() => {
+            window.location.href = `/blog/detail/${html.id}`;
+        }, 300);
 
-    let formData = new FormData();
-    let identity = identityUser();
-    let tags = selectedTags();
+        $('.alert').hide();
+        $('.alert-save-post').show();
+    };
+    /**
+     * Обработчик провального запроса
+     */
+    const errorCallback = (html) => {
+        console.log(html);
+    };
 
-    formData.append('title', $('.title').html());
-    formData.append('cover', $('.cover').prop('files')[0]);
-    formData.append('id_category', $('.category').val());
-
-    if (tags.length) {
-        formData.append('selectedTags', tags);
-    }
-
-    formData.append('status', status);
-    formData.append('id_user', identity);
-    formData.append('content', $('#editor').html());
-    formData.append('_token', $('[name="_token"]').val());
-
-    $.ajax({
-        type: 'POST',
-        url: '/api/posts',
-        dataType: 'JSON',
-        cache: false,
-        contentType: false,
-        processData: false,
-        async: false,
-        data: formData,
-        success: (html) => {
-            setTimeout(() => {
-                window.location.href = `/blog/detail/${html.id}`;
-            }, 300);
-
-            $('.alert').hide();
-            $('.alert-save-post').show();
-        }
-    });
+    createPostRequest(
+        getEditorData(buttonSave.attr('data-type')),
+        successCallback,
+        errorCallback
+    );
 });
 
 const toggleSelected = (button) => {
@@ -145,6 +165,21 @@ $('.close').click((event) => {
     $('.modal').hide();
 });
 
+$('.img-to-editor').click((event) => {
+    let file = $('.image').prop('files')[0];
+    let reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+        imgs.push(file);
+
+        $('#editor').append(`<img src="${reader.result}" class="editor-img">`);
+        moveable.target = document.querySelector(".editor-img");
+        $('.modal').hide();
+    }
+});
+
 /**
  * Отображение публикаций
  */
@@ -159,7 +194,7 @@ if ($('.editor-index').get(0)) {
             <td data-label="Power">${post.category_title}</td>
             <td data-label="Expiration">${post.views}</td>
             <td data-label="Value">
-                <a href="/blog/detail/${post.id}" class="btn btn__active">Просмотр</a> 
+                <a href="/blog/detail/${post.id}" class="btn btn__active">Просмотр</a>
                 <a href="/editor/update/${post.id}" class="btn btn__active">Изменить</a>
                 <a class="btn btn__active delete-button">Удалить</a>
             </td>
@@ -173,3 +208,48 @@ if ($('.editor-index').get(0)) {
 
     getPostsRequest(successCallback, errorCallback, 10, identityUser());
 }
+
+/**
+ * Обновление записи
+ */
+$('.btn-change').click((event) => {
+    console.log('Change');
+});
+
+
+/**
+ * Movable js
+ **/
+ const moveable = new Moveable(document.body, {
+     target: document.querySelector(".editor-img"),
+     scalable: true,
+     throttleScale: 0,
+     keepRatio: true,
+ });
+
+ const frame = {
+     translate: [0, 0],
+ };
+ moveable.on("resizeStart", ({ target, set, setOrigin, dragStart }) => {
+     // Set origin if transform-orgin use %.
+     setOrigin(["%", "%"]);
+
+     // If cssSize and offsetSize are different, set cssSize. (no box-sizing)
+     const style = window.getComputedStyle(target);
+     const cssWidth = parseFloat(style.width);
+     const cssHeight = parseFloat(style.height);
+     set([cssWidth, cssHeight]);
+
+     // If a drag event has already occurred, there is no dragStart.
+     dragStart && dragStart.set(frame.translate);
+ }).on("resize", ({ target, width, height, drag }) => {
+     target.style.width = `${width}px`;
+     target.style.height = `${height}px`;
+
+     // get drag event
+     frame.translate = drag.beforeTranslate;
+     target.style.transform
+         = `translate(${drag.beforeTranslate[0]}px, ${drag.beforeTranslate[1]}px)`;
+ }).on("resizeEnd", ({ target, isDrag, clientX, clientY }) => {
+     console.log("onResizeEnd", target, isDrag);
+ });
