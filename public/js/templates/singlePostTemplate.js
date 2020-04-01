@@ -16,11 +16,10 @@ const singlePostTemplate = (post) => {
                     <li>${post.category.title}</li>
                 </ul>
                 <p>
-                    It’s that time again when people start thinking about their New Years Resolutions.
-                    Usually they involve, losing weight, quitting smoking, and joining a gym, just to
-                    mention a few.
+                    ${post.description}
                 </p>
                 <a href="/blog/detail/${post.id}" class="btn btn-success">Читать далее</a>
                 </div>
           </div>
-    `)};
+    `)
+};
