@@ -16,7 +16,7 @@ class Post extends Model
     protected $table = 'post';
 
     protected $fillable = [
-        'title', 'cover', 'id_category', 'status', 'content', 'id_user'
+        'title', 'cover', 'description', 'id_category', 'status', 'content', 'id_user'
     ];
 
     const RECOMMENDATION_LIMIT = 10;
@@ -97,9 +97,19 @@ class Post extends Model
         $this->save();
     }
 
-    public static function getRecommendation()
+    public function getRecommendation()
     {
-        return self::orderBy('views', 'desc')->limit(self::RECOMMENDATION_LIMIT)->get();
+        return self::where('id', '!=', $this->id)->
+                     orderBy('views', 'desc')->
+                     limit(self::RECOMMENDATION_LIMIT)->
+                     get();
+    }
+
+    public static function getRecommendationIndex()
+    {
+        return self::orderBy('views', 'desc')->
+                     limit(self::RECOMMENDATION_LIMIT)->
+                     get();
     }
 
     public static function findByOptions(PostFindOptions $postFindOptions)
