@@ -17,6 +17,9 @@
             <option value="{{$category->id}}">{{$category->title}}</option>
         @endforeach
     </select>
+    <div class="description" contenteditable="true" style="background: #fff;">
+        Description
+    </div>
     <div class="tags-list" style="margin-bottom: 15px;">
         <h3>Выберите теги</h3>
         @foreach($tags as $tag)
@@ -91,7 +94,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-dark" style="margin: auto;">Загрузить</button>
+            <button class="btn btn-dark img-to-editor" style="margin: auto;">Загрузить</button>
         </div>
     </div>
 
