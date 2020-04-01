@@ -74,6 +74,8 @@ Route::group(['prefix' => 'editor'], function() {
 
 Route::get('/user/{id}', 'ProfileController@user');
 
-Route::get('/blog', 'BlogController@index');
-
-Route::get('/blog/detail/{id}', 'BlogController@detail');
+Route::group(['prefix' => 'blog'], function() {
+    Route::get('', 'BlogController@index');
+    Route::get('detail/{id}', 'BlogController@detail');
+    Route::get('stars', 'BlogController@starsPost');
+});
