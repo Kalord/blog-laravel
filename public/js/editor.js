@@ -120,6 +120,19 @@ const identityUser = () => {
     return identity;
 };
 
+/**
+ * Замена заглушек пути до изображения на соответствующие данные из массива dataUrl
+ **/
+const setDataForImage = () => {
+    let resources = $('#editor').find('.editor-img');
+
+    for(let i = 0; i < dataUrl.length; i++)
+    {
+        let resource = $(resources.get(i));
+        resource.attr('src', dataUrl[i]);
+    }
+};
+
 $('.btn-save').click((event) => {
     /**
      * Текущая нажатая кнопка
@@ -143,29 +156,13 @@ $('.btn-save').click((event) => {
         $('.alert').hide();
         $('.alert-save-post').show();
 
-        //@tmp
-        let resources = $('#editor').find('.editor-img');
-
-        for(let i = 0; i < dataUrl.length; i++)
-        {
-            let resource = $(resources.get(i));
-            resource.attr('src', dataUrl[i]);
-        }
-        //@endtmp
+        setDataForImage();
     };
     /**
      * Обработчик провального запроса
      */
     const errorCallback = (html) => {
-        //@tmp
-        let resources = $('#editor').find('.editor-img');
-
-        for(let i = 0; i < dataUrl.length; i++)
-        {
-            let resource = $(resources.get(i));
-            resource.attr('src', dataUrl[i]);
-        }
-        //endtmp
+        setDataForImage();
     };
 
     createPostRequest(
