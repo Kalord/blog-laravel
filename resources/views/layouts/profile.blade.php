@@ -27,8 +27,6 @@ http://www.templatemo.com/tm-467-easy-profile
 </div>
 
     @yield('content')
-<!-- movable js -->
-<script src="https://daybrush.com/moveable/release/latest/dist/moveable.min.js"></script>
 
 <!-- javascript js -->
 <script src="/js/jquery.js"></script>
