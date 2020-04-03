@@ -7,6 +7,7 @@ use App\User;
 use App\UserSettings;
 use App\Post;
 use App\Category;
+use App\StarsPost;
 
 class ProfileController extends Controller
 {
@@ -14,6 +15,7 @@ class ProfileController extends Controller
     {
         return view('profile', [
             'user'   => Auth()->user(),
+            'stars'  => StarsPost::percentCalc(Auth()->id()),
             'advice' => Post::getPopularPostsByIdUser(Auth()->id(), Category::getIdByTitle('advice')),
             'recipe' => Post::getPopularPostsByIdUser(Auth()->id(), Category::getIdByTitle('recipe'))
         ]);

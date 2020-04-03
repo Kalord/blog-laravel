@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PercentTable;
 
 class StarsPost extends Model
 {
@@ -30,7 +31,6 @@ class StarsPost extends Model
         ]);
     }
 
-
     public static function addStars($id_user, $id_post, $stars)
     {
         $record = self::where('id_user', '=', $id_user)->
@@ -41,5 +41,11 @@ class StarsPost extends Model
 
         $record->stars = $stars;
         return $record->save();
+    }
+
+    public static function percentCalc($id_user)
+    {
+        $percentTableStars = new PercentTableStars();
+        return $percentTableStars->calc($id_user);
     }
 }

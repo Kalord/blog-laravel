@@ -116,21 +116,13 @@
 		<div class="col-md-6 col-sm-12">
 			<div class="skills">
 				<h2 class="white">Звезды</h2>
-				<strong>5</strong>
-				<span class="pull-right">70%</span>
-				<div class="progress">
-					<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-				</div>
-				<strong>4</strong>
-				<span class="pull-right">85%</span>
-				<div class="progress">
-					<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
-				</div>
-				<strong>3</strong>
-				<span class="pull-right">95%</span>
-				<div class="progress">
-					<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;"></div>
-				</div>
+				@foreach($stars as $key => $value)
+						<strong>{{$key}}</strong>
+						<span class="pull-right">{{$value}}</span>
+						<div class="progress">
+							<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{$value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$value}}%;"></div>
+						</div>
+				@endforeach
 			</div>
 		</div>
 	</div>
