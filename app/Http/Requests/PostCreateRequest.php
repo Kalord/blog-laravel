@@ -23,29 +23,35 @@ class PostCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required'             => 'У записи должен быть заголовок',
-            'title.min'                  => 'Минимальный размер заголовка - 3 символа',
-            'title.max'                  => 'Максимальный размер заголовка - 30 символов',
+            'title.required'       => 'У записи должен быть заголовок',
+            'title.min'            => 'Минимальный размер заголовка - 3 символа',
+            'title.max'            => 'Максимальный размер заголовка - 30 символов',
 
-            'cover.required' => 'Неудалось загрузить изображение',
-            'cover.mimes' => 'Файл должен иметь одно из расшерений: jpg, bmp, png',
+            'cover.required'       => 'Неудалось загрузить изображение',
+            'cover.mimes'          => 'Файл должен иметь одно из расшерений: jpg, bmp, png',
 
-            'id_category.required'          => 'У записи должна быть категория',
-            'id_category.min'               => 'Некорректная категория',
-            'id_category.max'               => 'Некорректная категория',
+            'id_category.required' => 'У записи должна быть категория',
+            'id_category.min'      => 'Некорректная категория',
+            'id_category.max'      => 'Некорректная категория',
 
-            'selectedTags'               => 'У записи должны быть теги',
-            'selectedTags.min'           => 'Некорректные теги',
-            'selectedTags.max'           => 'Некорректные теги',
+            'selectedTags'         => 'У записи должны быть теги',
+            'selectedTags.min'     => 'Некорректные теги',
+            'selectedTags.max'     => 'Некорректные теги',
         ];
     }
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            'selectedTags' => explode(',', $this->get('selectedTags')),
-            'id_user'      => User::findIdByToken($this->get('id_user'))
-        ]);
+        $mergeData = [
+            'id_user' => User::findIdByToken($this->get('id_user'))
+        ];
+
+        if($this->get('selectedTags'))
+        {
+            $mergeData['selectedTags'] = explode(',', $this->get('selectedTags'));
+        }
+
+        $this->merge($mergeData);
     }
 
     /**
