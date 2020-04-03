@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use \App\DataProvider\PostFindOptions;
+use App\Helpers\FileLoad;
 
 class Post extends Model
 {
@@ -22,6 +23,8 @@ class Post extends Model
     const RECOMMENDATION_LIMIT = 10;
 
     const COVER_DIR = '/uploads/covers/';
+
+    const RESOURCE_DIR = '/uploads/resources/';
 
     /**
      * Пост заблокирован
@@ -50,13 +53,25 @@ class Post extends Model
 
     public static function createPost($data, $files)
     {
+        //Refactoring
         if(key_exists('cover', $files))
         {
-            $cover = $files['cover'];
-            $fileName = self::COVER_DIR . Str::random(16) . '.' . $cover->extension();
-            $cover->move(public_path(self::COVER_DIR), $fileName);
-            $data['cover'] = $fileName;
+            $data['cover'] = FileLoad::load($files['cover'], self::COVER_DIR);
         }
+
+        if(key_exists('resources', $data))
+        {
+            $resources = $data['resources'];
+            $srcKey = $data['src_key'];
+            $srcKey = "~$srcKey~";
+
+            foreach($resources as $resource)
+            {
+                $src = FileLoad::load($resource, self::RESOURCE_DIR);
+                $data['content'] = preg_replace($srcKey, $src, $data['content'], 1);
+            }
+        }
+        //Refactoring
 
         $post = parent::create($data);
 
