@@ -54,14 +54,14 @@
                             <h5>Рекомендации</h5>
                         </div>
                         @foreach($recommendation as $post)
-                        <div class="news-item">
-                            <div class="ni-pic">
-                                <img src="{{$post->cover}}" alt="" style="width: 250px; height: 150px">
+                            <div class="news-item">
+                                <div class="ni-pic">
+                                    <a href="/blog/detail/{{$post->id}}">
+                                        <img src="{{$post->cover}}" alt="" style="width: 250px; height: 150px">
+                                    </a>
+                                    <h5><a class="recommend-link" href="/blog/detail/{{$post->id}}">{{$post->title}}</a></h5>
+                                </div>
                             </div>
-                            <div class="ni-text">
-                                <h5><a href="/blog/detail/{{$post->id}}">{{$post->title}}</a></h5>
-                            </div>
-                        </div>
                         @endforeach
                     </div>
                     <div class="bs-popular-tag">
@@ -83,6 +83,14 @@
 <style>
     .active-tag {
         border: 3px solid #000;
+    }
+    .recommend-link {
+        color: #000;
+        text-align: center;
+        margin-left: 27%;
+    }
+    .recommend-link:hover {
+        color: #8034eb;
     }
 </style>
 @endsection
