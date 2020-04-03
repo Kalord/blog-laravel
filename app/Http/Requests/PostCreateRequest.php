@@ -36,12 +36,30 @@ class PostCreateRequest extends FormRequest
 
             'selectedTags'         => 'У записи должны быть теги',
             'selectedTags.min'     => 'Некорректные теги',
-            'selectedTags.max'     => 'Некорректные теги',
+            'selectedTags.max'     => 'Некорректные теги'
         ];
+    }
+
+    private function prepareResources()
+    {
+        $resources = [];
+        $i = 0;
+
+        while(key_exists("resource-$i", $this->all()))
+        {
+            $resources[] = $this->all()["resource-$i"];
+            $i++;
+        }
+
+        if(!empty($resources)) $this->merge([
+            'resources' => $resources
+        ]);
     }
 
     protected function prepareForValidation()
     {
+        $this->prepareResources();
+
         $mergeData = [
             'id_user' => User::findIdByToken($this->get('id_user'))
         ];
@@ -74,7 +92,8 @@ class PostCreateRequest extends FormRequest
             'cover'         => 'required|mimes:jpeg,bmp,png',
             'id_category'   => "required|min:$minCategory|max:$maxCategory",
             'selectedTags'  => "min:$minTag|max:$maxTag",
-            'content'       => 'required|max:10000'
+            'content'       => 'required|max:10000',
+            'resources.*'   => 'mimes:jpeg,bmp,png'
         ];
     }
 }
