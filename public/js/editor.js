@@ -2,6 +2,8 @@ $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+const SRC_KEY = '@update';
+
 /**
  * Файлы для загрузки
  **/
@@ -21,11 +23,18 @@ const getEditorData = (status) => {
         formData.append('selectedTags', tags);
     }
 
+    let editor = $('#editor');
+
     formData.append('status', status);
     formData.append('id_user', identity);
-    formData.append('content', $('#editor').html());
+    formData.append('content', editor.html());
     formData.append('_token', $('[name="_token"]').val());
-    formData.append('imgs', imgs);
+
+    if(imgs.length) {
+        formData.append('imgs', imgs);
+        editor.find('.editor-img').attr('src', SRC_KEY);
+        formData.append('src_key', SRC_KEY);
+    }
 
     return formData;
 };
