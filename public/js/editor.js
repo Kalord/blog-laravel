@@ -8,6 +8,7 @@ const SRC_KEY = '@update';
  * Файлы для загрузки
  **/
 let imgs = [];
+let dataUrl = [];
 
 const getEditorData = (status) => {
     let formData = new FormData();
@@ -25,16 +26,25 @@ const getEditorData = (status) => {
 
     let editor = $('#editor');
 
+    if (imgs.length) {
+        let resources = editor.find('.editor-img');
+        dataUrl = [];
+
+        for (let i = 0; i < imgs.length; i++) {
+            let resource = $(resources.get(i));
+            dataUrl.push(resource.attr('src'))
+            formData.append(`resource-${i}`, imgs[i]);
+            resource.attr('src', SRC_KEY);
+        }
+
+        resources.attr('src', SRC_KEY);
+        formData.append('src_key', SRC_KEY);
+    }
+
     formData.append('status', status);
     formData.append('id_user', identity);
     formData.append('content', editor.html());
     formData.append('_token', $('[name="_token"]').val());
-
-    if(imgs.length) {
-        formData.append('imgs', imgs);
-        editor.find('.editor-img').attr('src', SRC_KEY);
-        formData.append('src_key', SRC_KEY);
-    }
 
     return formData;
 };
@@ -132,12 +142,30 @@ $('.btn-save').click((event) => {
 
         $('.alert').hide();
         $('.alert-save-post').show();
+
+        //@tmp
+        let resources = $('#editor').find('.editor-img');
+
+        for(let i = 0; i < dataUrl.length; i++)
+        {
+            let resource = $(resources.get(i));
+            resource.attr('src', dataUrl[i]);
+        }
+        //@endtmp
     };
     /**
      * Обработчик провального запроса
      */
     const errorCallback = (html) => {
-        console.log(html);
+        //@tmp
+        let resources = $('#editor').find('.editor-img');
+
+        for(let i = 0; i < dataUrl.length; i++)
+        {
+            let resource = $(resources.get(i));
+            resource.attr('src', dataUrl[i]);
+        }
+        //endtmp
     };
 
     createPostRequest(
